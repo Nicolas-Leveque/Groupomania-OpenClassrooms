@@ -8,8 +8,13 @@ const auth = async (req, res, next) => {
         const user = await User.findOne({
             where: {id: decoded.userId}
         })
+        if (!user) {
+            throw new Error({error: 'Authentication error'})
+        }
 
     }catch (e) {
-
+        res.status(401).send(e)
     }
 }
+
+module.exports = auth

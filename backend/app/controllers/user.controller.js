@@ -15,9 +15,9 @@ exports.signup = async (req, res) => {
     }
 
 }
+
 exports.login = async ( req, res) => {
     try {
-        console.log(req.body)
         const user = await User.findOne({
             where: {
                 email: req.body.email
@@ -33,6 +33,29 @@ exports.login = async ( req, res) => {
         res.status(200).send(`${user.firstName} ${user.lastName}`)
 
     } catch(e) {
+        res.status(400).send(e)
+    }
+}
+
+exports.getUser = async (req, res) => {
+    try {
+        const id = req.params.id
+        const user = await User.findByPk(id)
+        if (!user) {
+            res.status(404).send()
+        }
+        res.status(200).send(user)
+    }catch(e) {
+        res.status(400).send(e)
+    }
+}
+
+exports.deleteUser = async ( req, res) => {
+    try {
+        const id = req.params.id
+        User.destroy({ where: { id: id}})
+        res.status(200).json({message: "Utilisateur supprimé"})
+    }catch(e) {
         res.status(400).send(e)
     }
 }
