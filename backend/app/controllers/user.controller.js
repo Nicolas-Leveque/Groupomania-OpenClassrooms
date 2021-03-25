@@ -1,6 +1,7 @@
 const express = require('express')
 const db = require('../models')
 const bcrypt = require('bcrypt')
+const jwt = require('jsonwebtoken')
 const User = db.users
 const Op = db.Sequelize.Op
 
@@ -30,7 +31,8 @@ exports.login = async ( req, res) => {
         if (!isMatch) {
             throw new Error('Erreur de connexion, veuillez réessayer')
         }
-        res.status(200).send(`${user.firstName} ${user.lastName}`)
+        const token = jwt.sign({ id: user.id.toString() }, process.env.JWT_TOKEN)
+        res.status(200).send({ user, token })
 
     } catch(e) {
         res.status(400).send(e)
