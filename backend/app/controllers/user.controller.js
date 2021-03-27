@@ -42,6 +42,7 @@ exports.login = async ( req, res) => {
 exports.getUser = async (req, res) => {
     try {
         const id = req.params.id
+        console.log(req.params)
         const user = await User.findByPk(id)
         if (!user) {
             res.status(404).send()
