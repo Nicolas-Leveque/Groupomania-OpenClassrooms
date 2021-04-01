@@ -42,7 +42,6 @@ exports.login = async ( req, res) => {
 exports.getUser = async (req, res) => {
     try {
         const id = req.params.id
-        console.log(req.params)
         const user = await User.findByPk(id)
         if (!user) {
             res.status(404).send()
@@ -58,6 +57,14 @@ exports.deleteUser = async ( req, res) => {
         const id = req.params.id
         User.destroy({ where: { id: id}})
         res.status(200).json({message: "Utilisateur supprimé"})
+    }catch(e) {
+        res.status(400).send(e)
+    }
+}
+
+exports.modifyUser = async (req, res) => {
+    try {
+        
     }catch(e) {
         res.status(400).send(e)
     }
