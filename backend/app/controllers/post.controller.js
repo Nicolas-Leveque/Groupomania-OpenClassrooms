@@ -38,7 +38,7 @@ exports.getOnePost = async (req, res) => {
 exports.getAllPosts = async (req, res) => {
     try {
         const post = await Post.findAll( {
-            where: {userId = req.params.userId}
+            where: {userId : req.params.id}
         })
         if (!post) {
             res.status(404).send()

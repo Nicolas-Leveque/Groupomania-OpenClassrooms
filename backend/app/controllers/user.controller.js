@@ -62,10 +62,10 @@ exports.deleteUser = async ( req, res) => {
     }
 }
 
-exports.modifyUser = async (req, res) => {
-    try {
+// exports.modifyUser = async (req, res) => {
+//     try {
         
-    }catch(e) {
-        res.status(400).send(e)
-    }
-}
+//     }catch(e) {
+//         res.status(400).send(e)
+//     }
+// }
