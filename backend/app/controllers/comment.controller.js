@@ -17,9 +17,16 @@ exports.createComment = async (req, res) => {
 
 exports.modifyComment = async (req, res) => {
     try {
+        const comemnt = await Comment.update( req.body, {
+            where: { id: req.params.id}
+        })
+        if (!comment) {
+            res.status(404).send()
+        }
+        res.status(200).send({ message: "Commentaire modifié "})
 
     } catch (e) {
-
+        res.status(500).send(e)
     }
 }
 

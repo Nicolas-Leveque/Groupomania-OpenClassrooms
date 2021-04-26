@@ -16,9 +16,15 @@ exports.createPost = async (req, res) => {
 
 exports.modifyPost = async (req, res) => {
     try {
-
+        const post = await Post.update( req.body, {
+            where: { id: req.params.id},
+        })
+        if (!post) {
+            res.status(404).send()
+        }
+        res.status(200).json({ message: "Post modifié"})
     } catch (e) {
-
+        res.status(500).send(e)
     }
 }
 

@@ -21,6 +21,10 @@ module.exports = (sequelize, Sequelize) => {
         password: {
             type: Sequelize.STRING,
             allowNull: false
+        },
+        admin: {
+            type: Sequelize.BOOLEAN,
+            allowNull: false
         }
     })
     User.beforeSave(async (user, options) => {
