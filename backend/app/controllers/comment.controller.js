@@ -17,7 +17,7 @@ exports.createComment = async (req, res) => {
 
 exports.modifyComment = async (req, res) => {
     try {
-        const comemnt = await Comment.update( req.body, {
+        const comment = await Comment.update( req.body, {
             where: { id: req.params.id}
         })
         if (!comment) {

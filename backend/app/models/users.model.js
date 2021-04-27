@@ -1,4 +1,5 @@
 const bcrypt = require('bcrypt')
+const jwt = require('jsonwebtoken')
 
 module.exports = (sequelize, Sequelize) => {
     const User = sequelize.define("user", {
@@ -25,11 +26,12 @@ module.exports = (sequelize, Sequelize) => {
         admin: {
             type: Sequelize.BOOLEAN,
             allowNull: false
-        }
+        },
     })
     User.beforeSave(async (user, options) => {
         const hashedPassword = await bcrypt.hash(user.password, 10)
         user.password = hashedPassword
     })
+
     return User
 }

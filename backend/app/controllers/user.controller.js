@@ -10,12 +10,17 @@ const router = new express.Router()
 exports.signup = async (req, res) => {
     try {
         const userInformation = { ...req.body}
+        console.log(userInformation)
         if ( userInformation.email === 'admin@groupomania.fr' ) {
             userInformation.admin = true
+        } else {
+            userInformation.admin = false
         }
-        await User.create(req.body)
-        res.status(201).send({ message: "User created"})
+
+        const user = await User.create(userInformation)
+        res.status(201).send({ user })
     } catch (e) {
+        console.log(e)
         res.status(400).send(e)
     }
 

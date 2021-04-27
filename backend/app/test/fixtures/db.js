@@ -7,10 +7,11 @@ const Comment = require('../../models/comments.model')
 
 const userOne = {
     id: 1,
-    email: 'nicolas@test.com',
+    email: 'admin@test.com',
     firstName: 'Nicolas', 
     lastName: 'Leveque',
-    password: 'mySecurePassword'
+    password: 'mySecurePassword',
+    admin: 'true'
 }
 
 const userTwo = {
@@ -18,12 +19,13 @@ const userTwo = {
     email: 'vanessa@test.com',
     firstName: 'Vanessa', 
     lastName: 'Jullian', 
-    password: 'anotherSecurePassword'
+    password: 'anotherSecurePassword',
+    admin: 'false'
 }
 
 const postOne = {
     id: 1,
-    type_post: text,
+    type_post: 'text',
     titre: 'Lorem Ipsum',
     contenu: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer tincidunt tortor augue, et elementum orci elementum eget. Nam tellus diam, blandit tempus nisi sodales, tristique mollis erat. Ut varius mi ut arcu malesuada, vitae fringilla nunc luctus. Curabitur non nisl malesuada, pellentesque est at, pulvinar mauris. Ut mollis mauris sed faucibus porta. Aliquam id metus arcu.',
     userId: 1,
@@ -32,7 +34,7 @@ const postOne = {
 
 const postTwo = {
     id: 2,
-    type_post: link,
+    type_post: 'link',
     titre: 'A link post',
     contenu: 'www.anewpost.com',
     userId: 2,
