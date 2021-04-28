@@ -41,7 +41,7 @@ exports.getOnePost = async (req, res) => {
     }
 }
 
-exports.getAllPosts = async (req, res) => {
+exports.getUserPosts = async (req, res) => {
     try {
         const post = await Post.findAll( {
             where: {userId : req.params.id}
@@ -54,6 +54,16 @@ exports.getAllPosts = async (req, res) => {
         res.status(400).send(e)
     }
 }
+
+exports.getAllposts = async (req, res) => {
+    try {
+        const posts = await Post.findAll()
+        res.status(200).send(posts)
+    } catch(e) {
+        res.status(400).send(e)
+    }
+}
+
 exports.deletePost = async (req, res) => {
     try {
         const id = req.params.id

@@ -21,11 +21,11 @@ const userTwo = {
     password: 'anotherSecurePassword',
     admin: false
 }
+
+
 const tokenUserTwo = jwt.sign({ id: 2 }, process.env.JWT_TOKEN)
 
-console.log(tokenUserTwo)
-
-beforeEach( async () => {
+beforeAll( async () => {
     await User.destroy({
         where: { 
             id: 1
@@ -82,6 +82,14 @@ test('not get user profile unauthenticated', async () => {
         .expect(401)
 })
 
+test('Should modify user infos', async () => {
+    await request(app)
+        .put('/user/2')
+        .set('Authorization', `Bearer ${tokenUserTwo}`)
+        .send({ firstName: "Van" })
+        .expect(200)
+})
+
 test('Delete user profile', async () => {
     await request(app)
         .delete('/2')
@@ -97,10 +105,3 @@ test('Should not delete user without authentication', async () => {
         .expect(401)
 })
 
-test('Should modify user infos', async () => {
-    await request(app)
-        .put('/user/2')
-        .set('Authorization', `Bearer ${tokenUserTwo}`)
-        .send({ firstName: "Van" })
-        .expect(200)
-})

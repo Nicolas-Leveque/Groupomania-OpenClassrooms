@@ -11,7 +11,7 @@ const userOne = {
     firstName: 'Nicolas', 
     lastName: 'Leveque',
     password: 'mySecurePassword',
-    admin: 'true'
+    admin: true
 }
 
 const userTwo = {
@@ -20,7 +20,7 @@ const userTwo = {
     firstName: 'Vanessa', 
     lastName: 'Jullian', 
     password: 'anotherSecurePassword',
-    admin: 'false'
+    admin: false
 }
 
 const postOne = {
@@ -52,22 +52,44 @@ const commentTwo = {
     userId: 1
 }
 
-const setupDatabase = () => {
+const setupDatabase = async () => {
     await User.destroy({
-        truncate: true
+        where: {
+            id: 1
+        }
+    })
+    await User.destroy({
+        where: {
+            id: 2
+        }
     })
     await Post.destroy({
-        truncate: true
+        where: {
+            id: 2
+        }
+    })
+    await Post.destroy({
+        where: {
+            id: 2
+        }
     })
     await Comment.destroy({
-        truncate: true
+        where: {
+            id: 1
+        }
     })
-    // await User.create(userOne)
-    // await User.create(userTwo)
-    // await Post.create(postOne)
-    // await Post.create(postTwo)
-    // await Comment.create(commentOne)
-    // await Comment.create(commentTwo)
+    await Comment.destroy({
+        where: {
+            id: 2
+        }
+    })
+    
+    await User.create(userOne)
+    await User.create(userTwo)
+    await Post.create(postOne)
+    await Post.create(postTwo)
+    await Comment.create(commentOne)
+    await Comment.create(commentTwo)
 }
 
 module.exports = {
