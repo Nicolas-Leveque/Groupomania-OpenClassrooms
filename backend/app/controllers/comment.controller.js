@@ -31,8 +31,7 @@ exports.modifyComment = async (req, res) => {
 
 exports.getOneComment = async (req, res) => {
     try {
-        const id = req.params.id
-        const comment = await Comment.findByPk(id)
+        const comment = await Comment.findByPk(req.params.id)
         if (!comment) {
             res.status(404).send()
         }
@@ -43,7 +42,7 @@ exports.getOneComment = async (req, res) => {
     }
 }
 
-exports.getAllComments = async (req, res) => {
+exports.getPostComments = async (req, res) => {
     try {
         const comment = await Comment.findAll({
             where: {postId: req.params.id}
