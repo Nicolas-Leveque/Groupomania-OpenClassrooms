@@ -62,12 +62,12 @@ const setupDatabase = () => {
     await Comment.destroy({
         truncate: true
     })
-    await User.create(userOne)
-    await User.create(userTwo)
-    await Post.create(postOne)
-    await Post.create(postTwo)
-    await Comment.create(commentOne)
-    await Comment.create(commentTwo)
+    // await User.create(userOne)
+    // await User.create(userTwo)
+    // await Post.create(postOne)
+    // await Post.create(postTwo)
+    // await Comment.create(commentOne)
+    // await Comment.create(commentTwo)
 }
 
 module.exports = {

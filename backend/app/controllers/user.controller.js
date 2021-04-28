@@ -10,7 +10,6 @@ const router = new express.Router()
 exports.signup = async (req, res) => {
     try {
         const userInformation = { ...req.body}
-        console.log(userInformation)
         if ( userInformation.email === 'admin@groupomania.fr' ) {
             userInformation.admin = true
         } else {
@@ -20,7 +19,6 @@ exports.signup = async (req, res) => {
         const user = await User.create(userInformation)
         res.status(201).send({ user })
     } catch (e) {
-        console.log(e)
         res.status(400).send(e)
     }
 

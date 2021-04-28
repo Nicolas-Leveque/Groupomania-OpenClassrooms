@@ -10,7 +10,6 @@ exports.createComment = async (req, res) => {
         await Comment.create(req.body)
         res.status(201).send({ message: "Comment created successfully"})
     } catch (e) {
-        console.log(e)
         res.status(400).send(e)
     }
 }
