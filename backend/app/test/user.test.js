@@ -69,7 +69,7 @@ test('Should not login nonexistent user', async () => {
 
 test('get user profile', async () => {
     await request(app)
-        .get('/user/2')
+        .get('/user/me')
         .set('Authorization', `Bearer ${tokenUserTwo}`)
         .send()
         .expect(200)
@@ -77,7 +77,7 @@ test('get user profile', async () => {
 
 test('not get user profile unauthenticated', async () => {
     await request(app)
-        .get('/user/2')
+        .get('/user/me')
         .send()
         .expect(401)
 })

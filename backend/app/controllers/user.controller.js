@@ -38,7 +38,7 @@ exports.login = async ( req, res) => {
         if (!isMatch) {
             throw new Error('Erreur de connexion, veuillez réessayer')
         }
-        const token = jwt.sign({ id: user.id.toString() }, process.env.JWT_TOKEN)
+        const token = jwt.sign({ id: user.id.toString() }, process.env.JWT_TOKEN, { expiresIn: 86400 })
         res.status(200).send({ user, token })
 
     } catch(e) {
@@ -48,12 +48,7 @@ exports.login = async ( req, res) => {
 
 exports.getUser = async (req, res) => {
     try {
-        const id = req.params.id
-        const user = await User.findByPk(id)
-        if (!user) {
-            res.status(404).send()
-        }
-        res.status(200).send(user)
+        res.status(200).send(req.user)
     }catch(e) {
         res.status(400).send(e)
     }
