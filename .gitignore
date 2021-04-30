@@ -1,3 +1,5 @@
 /backend/node_modules/
 /backend/app/config/dev.env
 /backend/app/config/test.env
+/frontend/node_modules/
+.DS_Store
