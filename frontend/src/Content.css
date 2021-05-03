@@ -1,0 +1,15 @@
+.corps {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 1%;
+
+}
+
+.content {
+    Width: 60%;
+    margin: 0;
+    height: 90vh;
+    padding: 2%;
+    box-shadow: 5px 5px 5px 1px rgba(0,0,0,0.65);
+}
