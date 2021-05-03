@@ -1,0 +1,23 @@
+header {
+    width: 96%;
+    display: flex;
+    flex-direction: row;
+    background-color: navy;
+    height: 7vh;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 2% 0 2%;
+}
+a {
+    outline: none;
+    text-decoration: none;
+    color: #fff;
+    
+}
+
+img {
+    max-height: 90%;
+    width: auto;
+}
+
+
