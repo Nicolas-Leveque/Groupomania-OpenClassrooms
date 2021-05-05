@@ -1,0 +1,24 @@
+.post-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.utilisateur-info {
+    display: flex;
+    flex-direction: row;
+
+}
+
+.info-partage {
+    display: flex;
+    flex-direction: column;
+    margin-left: 2%;
+    font-size: 13px;
+
+}
+
+.post-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}

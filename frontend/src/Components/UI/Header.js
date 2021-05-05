@@ -1,5 +1,5 @@
 import './Header.css'
-import logo from './logos/icon-left-font-monochrome-white.svg'
+import logo from '../../logos/icon-left-font-monochrome-white.svg'
 const Header = () => {
     return (
         <header>

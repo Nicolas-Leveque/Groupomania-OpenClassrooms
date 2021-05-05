@@ -1,0 +1,14 @@
+form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    /* align-items: flex-end; */
+}
+
+button {
+    margin: 2%;
+    width: 10vw;
+    background-color: navy;
+    color: #fff;
+    border-radius: 10px;
+}

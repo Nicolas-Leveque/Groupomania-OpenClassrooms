@@ -1,9 +1,9 @@
 import './Content.css';
 
-const Content = () => {
+const Content = (props) => {
     return (
         <div className="corps">
-            <div className="content"><p>Faux Contenu Lorem Ipsum etc...</p></div>
+            <div className="content">{props.children}</div>
         </div>
     )
 }
