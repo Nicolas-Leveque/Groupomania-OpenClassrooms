@@ -2,4 +2,5 @@
 /backend/app/config/dev.env
 /backend/app/config/test.env
 /frontend/node_modules/
+/frontend/src/examples/
 .DS_Store

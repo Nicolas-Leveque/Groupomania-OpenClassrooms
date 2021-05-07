@@ -6,7 +6,7 @@ import "./LoginRegister.css"
 class LoginRegister extends React.Component {
     constructor(props) {
         super(props)
-        this.state = {}
+        this.state = { isLoginOpen: true, isRegisterOpen: false }
     }
     showLoginBox() {
         this.setState({ isLoginOpen: true, isRegisterOpen: false })

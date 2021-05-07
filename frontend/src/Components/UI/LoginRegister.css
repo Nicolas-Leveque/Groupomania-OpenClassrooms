@@ -1,13 +1,15 @@
 .root-container {
-    width: 100%;
+    width: 96%;
     height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    padding: 2%;
 }
 
 .box-controller {
+    border-radius: 15px;
     visibility: visible;
     display: -webkit-box;
     display: -ms-flexbox;
@@ -20,6 +22,7 @@
     margin-bottom: 30px;
     align-items: center;
     transition: visibility 0.5s ease-out;
+    backdrop-filter: blur(15px);
 }
 
 .controller {
@@ -32,8 +35,9 @@
 
 
 .selected-controller {
-    transition: border 0.5s ease-out;
-    border-bottom: 2px solid blue;
+    transition: font-weight 0.2s ease;
+    font-weight: bold;
+    /* border-bottom: 2px solid blue; */
 }
 
 .box-container {
@@ -42,11 +46,18 @@
     max-width: 24em;
     min-width: 21em;
     box-shadow: 0px 0px 20px 0px rgba(15, 15, 15, 0.2);
-    border-radius: 6px;
+    border-radius: 10px;
     padding: 24px;
+    background-color: rgba(255, 255, 255, .1);
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, .1),
+                -4px -4px 10px rgba(0, 0, 0, .1);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    
 }
 
 .inner-container {
+    
     transition: visibility 0.2s ease-out;
 }
 
@@ -70,6 +81,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+    
 }
 
 .input-group {
@@ -90,10 +102,10 @@
 
 .login-input {
     height: 2.1em;
-    border-radius: 3px;
+    border-radius: 10px;
     border: 1px solid blue;
     transition: border 0.4s ease-out;
-    padding: 13px;
+    padding: 8px;
     font-family: Oxygen, sans-serif;
     font-size: 19px;
     color: #3e3e42;
@@ -117,11 +129,11 @@
 }
 
 .login-btn {
-    padding: 2px 30px;
+    padding: auto;
     /* background-color: #417cef; */
     border: 0;
     font-size: 18px;
-    border-radius: 3px;
+    border-radius: 10px;
     font-family: Oxygen, sans-serif;
     background-color: rgba(15, 15, 15, 0.03);
     margin-top: 20px;

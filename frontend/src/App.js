@@ -6,6 +6,7 @@ import Content from './Components/UI/Content'
 import ShareForm from './Components/FrontPage/ShareForm'
 import Post from './Components/FrontPage/Post'
 import LoginRegister from './Components/UI/LoginRegister'
+import fakeData from './examples/dummyDatas'
 
 class App extends React.Component {
     constructor(props) {
@@ -25,7 +26,8 @@ class App extends React.Component {
                 <ShareForm />
             </Content>
             <Content>
-                <Post />
+                <Post user={fakeData.userOne} post={fakeData.postOne} img={"https://i.imgur.com/iT8zBtl.jpeg"}/>
+                <Post user={fakeData.userTwo} post={fakeData.postThree}/>
             </Content>
             <Footer />
         </div>

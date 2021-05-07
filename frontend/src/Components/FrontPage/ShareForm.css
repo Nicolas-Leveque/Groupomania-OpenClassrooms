@@ -2,7 +2,28 @@ form {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    /* align-items: flex-end; */
+    
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    margin-top: 5px;
+    margin-bottom: 5px;
+
+}
+
+.input-group textarea {
+    resize: none;
+}
+
+.form-input {
+    
+    border-radius: 10px;
+    border: 1px solid blue;
+    padding: 8px;
+    font-size: 19px;
+    color: #3e3e42;
 }
 
 button {

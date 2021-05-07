@@ -1,5 +1,7 @@
 .App {
   text-align: center;
-  background-color: #F3F2EF;
+  /* background-color: #F3F2EF; */
+  /* background-image: linear-gradient(45deg, #ffd800, #ff5520, #750cf2); */
+  background-image: url("./logos/Groupomania-building.jpg");
 }
 

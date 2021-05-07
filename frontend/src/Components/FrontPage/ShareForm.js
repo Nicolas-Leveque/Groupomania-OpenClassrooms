@@ -3,8 +3,17 @@ import './ShareForm.css'
 const ShareForm = () => {
     return (
         <form action="">
-            <input type="text" name="title" placeholder="titre"/>
-            <input type="text" name="post" />
+            <div className="input-group">
+            <input 
+            type="text" 
+            name="title" 
+            placeholder="titre"
+            className="form-input"/>
+            <textarea 
+            name="post" 
+            rows="5"
+            className="form-input"/>
+            </div>
             <button>Publier</button>
         </form>
     )

@@ -43,7 +43,7 @@ class RegisterBox extends React.Component {
                             />
                     </div>
                     <div className="input-group">
-                        <label htmlFor="password">Nom</label>
+                        <label htmlFor="password">Mot de passe</label>
                         <input 
                             type="text"
                             name="password"
