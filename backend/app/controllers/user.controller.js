@@ -17,8 +17,10 @@ exports.signup = async (req, res) => {
         }
 
         const user = await User.create(userInformation)
-        res.status(201).send({ user })
+        const token = jwt.sign({ id: user.dataValues.id.toString() }, process.env.JWT_TOKEN, { expiresIn: 86400 })
+        res.status(201).send({ user, token })
     } catch (e) {
+        console.log(e)
         res.status(400).send(e)
     }
 
@@ -77,4 +79,9 @@ exports.modifyUser = async (req, res) => {
     }catch(e) {
         res.status(500).send(e)
     }
+}
+
+exports.uploadAvatar = async (req, res) => {
+    req.user.avatar = req.file.buffer
+    await User.update( )
 }

@@ -27,6 +27,9 @@ module.exports = (sequelize, Sequelize) => {
             type: Sequelize.BOOLEAN,
             allowNull: false
         },
+        avatar: {
+            type: Sequelize.BLOB('long'),
+        }
     })
     User.beforeSave(async (user, options) => {
         const hashedPassword = await bcrypt.hash(user.password, 10)

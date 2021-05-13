@@ -5,7 +5,8 @@ footer {
     justify-content: center;
     position: sticky;
     bottom: 0;
-    width: 100%
+    width: 100%;
+    font-size: 12px;
     
 
 }

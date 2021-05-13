@@ -22,7 +22,6 @@
     margin-bottom: 30px;
     align-items: center;
     transition: visibility 0.5s ease-out;
-    backdrop-filter: blur(15px);
 }
 
 .controller {
@@ -48,12 +47,9 @@
     box-shadow: 0px 0px 20px 0px rgba(15, 15, 15, 0.2);
     border-radius: 10px;
     padding: 24px;
-    background-color: rgba(255, 255, 255, .1);
+    background-color: #fff;
     box-shadow: 4px 4px 10px rgba(0, 0, 0, .1),
                 -4px -4px 10px rgba(0, 0, 0, .1);
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
-    
 }
 
 .inner-container {
@@ -130,7 +126,7 @@
 
 .login-btn {
     padding: auto;
-    /* background-color: #417cef; */
+    color: #64B5F6;
     border: 0;
     font-size: 18px;
     border-radius: 10px;
@@ -138,7 +134,7 @@
     background-color: rgba(15, 15, 15, 0.03);
     margin-top: 20px;
     border: 2px solid #417cef;
-    transition: background-color 0.3s ease-out;
+    transition: background-color 0.8s ease-out;
     cursor: pointer;
 }
 
@@ -148,34 +144,6 @@
     color: white;
 }
 
-.danger-error {
-    color: #e74c3c;
-    font-size: 16px;
-}
-
-.password-state {
-    display: flex;
-    flex-direction: row;
-    margin-top: 20px;
-}
-
-.pwd {
-    height: 6px;
-    flex: 1;
-    visibility: hidden;
-}
-
-.pwd-weak {
-    background-color: #e74c3c;
-}
-
-.pwd-medium {
-    background-color: #3498db;
-}
-
-.pwd-strong {
-    background-color: #2ecc71;
-}
 
 .show {
     visibility: visible;

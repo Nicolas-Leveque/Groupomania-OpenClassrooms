@@ -5,16 +5,37 @@ class RegisterBox extends React.Component {
     
     constructor(props) {
         super(props)
-        this.state = {}
+        this.state = { email:'', firstName:'', lastName:'', password:'' }
+        this.submitRegister = this.submitRegister.bind(this)
     }
 
-    submitRegister(e) {}
+    submitRegister(e) {
+        const registerRequest = { 
+            email: this.state.email,
+            firstName: this.state.firstName,
+            lastName: this.state.lastName,
+            password: this.state.password
+        }
+        const myHeaders = new Headers({
+            'Content-Type': 'application/json'
+        })
+        fetch('http://localhost:3000/signup', {
+            method:'post',
+            headers: myHeaders,
+            body: JSON.stringify(registerRequest)
+        })
+            .then((response) => response.json())
+            .then(json => {
+                localStorage.setItem('token', json.token)
+                console.log(json.token)
+            })
+    }
 
     render() {
         return(
             <div className="inner-container">
                 <div className="header">Register</div>
-                <div className="box">
+                <form className="box">
                     <div className="input-group">
                         <label htmlFor="email">Email</label>
                         <input 
@@ -22,6 +43,7 @@ class RegisterBox extends React.Component {
                             name="email"
                             className="login-input"
                             placeholder="Email"
+                            onChange={(e) => this.setState({ email: e.target.value })}
                             />
                     </div>
                     <div className="input-group">
@@ -31,6 +53,7 @@ class RegisterBox extends React.Component {
                             name="firstname"
                             className="login-input"
                             placeholder="Prénom"
+                            onChange={(e) => this.setState({ firstName: e.target.value })}
                             />
                     </div>
                     <div className="input-group">
@@ -40,6 +63,7 @@ class RegisterBox extends React.Component {
                             name="lastname"
                             className="login-input"
                             placeholder="Nom"
+                            onChange={(e) => this.setState({ lastName: e.target.value })}
                             />
                     </div>
                     <div className="input-group">
@@ -49,16 +73,17 @@ class RegisterBox extends React.Component {
                             name="password"
                             className="login-input"
                             placeholder="Password"
+                            onChange={(e) => this.setState({ password: e.target.value })}
                             />
                     </div>
                     <button
                         type="button"
                         className="login-btn"
                         onClick={this
-                        .submitRegister
-                        .bind(this)}>Register
+                        .submitRegister}
+                    >Register
                     </button>
-                </div>
+                </form>
             </div>
         )
     }
