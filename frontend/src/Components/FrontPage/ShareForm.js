@@ -1,22 +1,25 @@
+import React, { useState } from 'react'
+import NewShare from './NewShare'
 import './ShareForm.css'
 
-const ShareForm = () => {
-    return (
-        <form action="">
-            <div className="input-group">
-            <input 
-            type="text" 
-            name="title" 
-            placeholder="titre"
-            className="form-input"/>
-            <textarea 
-            name="post" 
-            rows="5"
-            className="form-input"/>
-            </div>
-            <button>Publier</button>
-        </form>
+const ShareForm = (props) => {
+    const [isFormVisible, setIsFormVisible] = useState(false)
+    const showForm = () => {
+        setIsFormVisible(true)
+    }
+    const collapseForm = () => {
+        setIsFormVisible(false)
+    }
+    return(
+        <div className="share-form">
+            {!isFormVisible && (
+                <button onClick={ showForm }>Partager</button>)}
+            {isFormVisible && (
+                <NewShare onCancel={collapseForm} />)}
+        </div>
     )
+
 }
+
 
 export default ShareForm

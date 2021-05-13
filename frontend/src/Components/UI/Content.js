@@ -1,6 +1,4 @@
 import React from 'react'
-// import LoginRegister from'../UI/LoginRegister'
-// import FrontPage from '../FrontPage/FrontPage'
 
 import './Content.css';
 
@@ -21,6 +19,4 @@ class Content extends React.Component {
         )
     }
 }
-
-
 export default Content;

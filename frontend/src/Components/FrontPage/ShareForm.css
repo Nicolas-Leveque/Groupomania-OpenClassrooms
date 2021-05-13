@@ -12,7 +12,7 @@ form {
     flex-direction: column;
     margin-top: 5px;
     margin-bottom: 5px;
-
+    width: 100%;
 }
 
 .input-group textarea {
@@ -20,12 +20,18 @@ form {
 }
 
 .form-input {
-    
+    align-self: center;
+    width: 90%;
     border-radius: 10px;
     border: 1px solid blue;
     padding: 8px;
     font-size: 19px;
     color: #3e3e42;
+}
+.control-group {
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
 }
 
 button {
