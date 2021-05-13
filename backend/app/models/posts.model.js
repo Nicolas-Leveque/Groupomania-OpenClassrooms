@@ -9,11 +9,11 @@ module.exports = (sequelize, Sequelize) => {
             allowNull: false
         },
         contenu: {
-            type: Sequelize.STRING,
+            type: Sequelize.TEXT,
             allowNull: false
         },
         image: {
-            type: Sequelize.STRING,
+            type: Sequelize.BLOB('long'),
             allowNull: true
         }
     })
