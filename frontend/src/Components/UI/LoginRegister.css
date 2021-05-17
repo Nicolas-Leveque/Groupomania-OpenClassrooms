@@ -148,3 +148,9 @@
 .show {
     visibility: visible;
 }
+
+.confirm-password {
+    font-size: 15px;
+    color: red;
+    /* visibility: hidden; */
+}

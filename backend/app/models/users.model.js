@@ -27,8 +27,23 @@ module.exports = (sequelize, Sequelize) => {
             type: Sequelize.BOOLEAN,
             allowNull: false
         },
-        avatar: {
+        imageType: {
+            type: Sequelize.STRING
+        },
+        imageName: {
+            type: Sequelize.STRING
+        },
+        imageData: {
             type: Sequelize.BLOB('long'),
+        },
+        fullName: {
+            type: Sequelize.VIRTUAL,
+            get(){
+                return `${this.firstName} ${this.lastName}`;
+            },
+            set(value) {
+                throw new Error('Do not try to set the `fullName` value!');
+            }
         }
     })
     User.beforeSave(async (user, options) => {

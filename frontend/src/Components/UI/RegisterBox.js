@@ -5,11 +5,12 @@ class RegisterBox extends React.Component {
     
     constructor(props) {
         super(props)
-        this.state = { email:'', firstName:'', lastName:'', password:'' }
+        this.state = { email:'', firstName:'', lastName:'', password:''}
         this.submitRegister = this.submitRegister.bind(this)
     }
 
     submitRegister(e) {
+        e.preventDefault()
         const registerRequest = { 
             email: this.state.email,
             firstName: this.state.firstName,
@@ -30,12 +31,12 @@ class RegisterBox extends React.Component {
                 console.log(json.token)
             })
     }
-
+    
     render() {
         return(
             <div className="inner-container">
                 <div className="header">Register</div>
-                <form className="box">
+                <form className="box" onSubmit={this.submitRegister}>
                     <div className="input-group">
                         <label htmlFor="email">Email</label>
                         <input 
@@ -69,7 +70,7 @@ class RegisterBox extends React.Component {
                     <div className="input-group">
                         <label htmlFor="password">Mot de passe</label>
                         <input 
-                            type="text"
+                            type="password"
                             name="password"
                             className="login-input"
                             placeholder="Password"
@@ -77,10 +78,8 @@ class RegisterBox extends React.Component {
                             />
                     </div>
                     <button
-                        type="button"
+                        type="submit"
                         className="login-btn"
-                        onClick={this
-                        .submitRegister}
                     >Register
                     </button>
                 </form>

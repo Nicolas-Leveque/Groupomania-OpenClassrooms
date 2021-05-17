@@ -3,6 +3,7 @@ const db = require('../models')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const User = db.users
+const fs = require('fs')
 const Op = db.Sequelize.Op
 
 const router = new express.Router()
@@ -44,6 +45,7 @@ exports.login = async ( req, res) => {
         res.status(200).send({ user, token })
 
     } catch(e) {
+        console.log(e)
         res.status(400).send(e)
     }
 }
@@ -82,6 +84,19 @@ exports.modifyUser = async (req, res) => {
 }
 
 exports.uploadAvatar = async (req, res) => {
-    req.user.avatar = req.file.buffer
-    await User.update( )
+    try {
+        console.log(req.file)
+        await User.update({
+            imageType: req.file.mimetype,
+            imageName: req.file.originalname,
+            imageData: req.file.buffer, 
+            },{where: {
+                id: req.user.id
+            }
+            })
+        res.status(201).json({ message: "avatar en ligne" })
+    } catch (e) {
+        console.log(e)
+        res.status(400).send(e)
+    }
 }

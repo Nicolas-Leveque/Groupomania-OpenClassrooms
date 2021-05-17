@@ -1,15 +1,43 @@
+import React, { useState, useEffect } from 'react'
 import "./FrontPage.css"
 
 import ShareForm from '../FrontPage/ShareForm'
 import Post from '../FrontPage/Post'
-import fakeData from '../../examples/dummyDatas'
 
 const FrontPage = (props) => {
+    const [data, setData] = useState([])
+    
+    useEffect( () => {
+        const myHeaders = new Headers({
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + localStorage.getItem('token')
+        })
+        function fetchData() {
+            fetch('http://localhost:3000/post', {
+                    method:'get',
+                    headers: myHeaders,
+                }).then(response => response.json())
+                .then(json => {
+                    setData( json )
+                })
+        }
+        fetchData()
+        // eslint-disable-next-line
+    }, [])
     return (
         <div className="frontpage" >
                 <ShareForm />
-                <Post user={fakeData.userOne} post={fakeData.postOne} img={"https://i.imgur.com/iT8zBtl.jpeg"}/>
-                <Post user={fakeData.userTwo} post={fakeData.postThree}/>
+                
+                {data.map((data) => (
+                    <Post 
+                        firstName={data.firstName}
+                        lastName={data.lastName}
+                        titre={data.titre}
+                        contenu={data.contenu}
+                        avatar={data.avatar}
+                        key={data.id}
+                    />
+                ) )}
         </div>
     )
 }

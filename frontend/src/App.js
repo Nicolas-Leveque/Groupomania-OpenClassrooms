@@ -7,6 +7,7 @@ import LoginRegister from './Components/UI/LoginRegister'
 import FrontPage from './Components/FrontPage/FrontPage'
 
 const App = () => {
+    
     return (
         <div className='App'>
             <Header />

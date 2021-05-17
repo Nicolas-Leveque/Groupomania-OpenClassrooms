@@ -32,7 +32,7 @@ class LoginBox extends React.Component {
         return (
             <div className="inner-container">
                 <div className="header">Login</div>
-                <form className="box">
+                <form className="box" onSubmit={this.submitLogin}>
                     <div className="input-group">
                         <label htmlFor="email">Email</label>
                         <input 
@@ -45,16 +45,16 @@ class LoginBox extends React.Component {
                     <div className="input-group">
                         <label htmlFor="password">Password</label>
                         <input 
-                        type="text"
+                        type="password"
                         onChange={(e) => this.setState({ password: e.target.value })}
                         name="password"
                         className="login-input"
                         placeholder="Password"/>
                     </div>
                     <button
-                        type="button"
+                        type="submit"
+                        value="Submit"
                         className="login-btn"
-                        onClick={this.submitLogin}
                         >Login</button>
                 </form>
             </div>

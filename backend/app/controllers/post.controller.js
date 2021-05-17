@@ -1,7 +1,8 @@
 const express = require('express')
 const db = require('../models')
 const Post = db.posts
-const Op = db.sequelize.Op
+const User = db.users
+const { QueryTypes } = require('sequelize')
 
 const router = new express.Router()
 
@@ -57,7 +58,9 @@ exports.getUserPosts = async (req, res) => {
 
 exports.getAllposts = async (req, res) => {
     try {
-        const posts = await Post.findAll()
+        const posts = await Post.sequelize.query('SELECT posts.id, type_post, titre, contenu, posts.createdAt, posts.updatedAt,firstName, lastName, avatar  FROM posts JOIN users ON posts.userId = users.id', {type: QueryTypes.SELECT})
+        // const posts = await Post.findAll()
+        // const posts = await Post.findAll({ include: 'User' })
         res.status(200).send(posts)
     } catch(e) {
         res.status(400).send(e)

@@ -1,11 +1,12 @@
 import './NewShare.css'
 
 const NewShare = (props) => {
+
     return (
-        <form action="">
+        <form onSubmit="">
             <div className="input-group">
                 <input 
-                type="text" 
+                type="text"
                 name="title" 
                 placeholder="titre"
                 className="form-input"/>
