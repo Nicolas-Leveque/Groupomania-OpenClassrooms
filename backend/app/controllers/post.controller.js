@@ -58,9 +58,14 @@ exports.getUserPosts = async (req, res) => {
 
 exports.getAllposts = async (req, res) => {
     try {
-        const posts = await Post.sequelize.query('SELECT posts.id, type_post, titre, contenu, posts.createdAt, posts.updatedAt,firstName, lastName, avatar  FROM posts JOIN users ON posts.userId = users.id', {type: QueryTypes.SELECT})
-        // const posts = await Post.findAll()
-        // const posts = await Post.findAll({ include: 'User' })
+        const posts = await Post.sequelize.query('SELECT posts.id, type_post, titre, contenu, DATE_FORMAT(posts.createdAt, "le %e/%m/%Y à %H:%i") AS creation, DATE_FORMAT(posts.updatedAt, "le %e/%m/%Y à %H:%i") AS mise_a_jour,firstName, lastName, imageData  FROM posts JOIN users ON posts.userId = users.id ORDER BY creation DESC', {type: QueryTypes.SELECT})
+        .then(posts => {
+            posts.map(post => {
+                const userImage = post.imageData.toString('base64')
+                post['imageData'] = userImage
+            })
+            return posts
+        })
         res.status(200).send(posts)
     } catch(e) {
         res.status(400).send(e)

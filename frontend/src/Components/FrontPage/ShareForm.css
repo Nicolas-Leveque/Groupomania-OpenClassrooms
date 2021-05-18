@@ -1,3 +1,7 @@
+.share-form {
+    display: flex;
+}
+
 form {
     display: flex;
     flex-direction: column;
@@ -40,4 +44,14 @@ button {
     background-color: navy;
     color: #fff;
     border-radius: 10px;
+    cursor: pointer;
+}
+
+.trigger-partage {
+    align-self: center;
+    width: 90vw;
+    height: 5vh;
+    background-color: #fff;
+    color: #111;
+    
 }

@@ -33,8 +33,9 @@ const FrontPage = (props) => {
                         firstName={data.firstName}
                         lastName={data.lastName}
                         titre={data.titre}
+                        createdAt={data.creation}
                         contenu={data.contenu}
-                        avatar={data.avatar}
+                        avatar={data.imageData}
                         key={data.id}
                     />
                 ) )}

@@ -13,7 +13,7 @@ const ShareForm = (props) => {
     return(
         <div className="share-form">
             {!isFormVisible && (
-                <button onClick={ showForm }>Partager</button>)}
+                <button className="trigger-partage" onClick={ showForm }>Partager</button>)}
             {isFormVisible && (
                 <NewShare onCancel={collapseForm} />)}
         </div>
