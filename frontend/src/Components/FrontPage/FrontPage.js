@@ -37,6 +37,7 @@ const FrontPage = (props) => {
                         contenu={data.contenu}
                         avatar={data.imageData}
                         key={data.id}
+                        nbrComment={data.nbr_comments}
                     />
                 ) )}
         </div>

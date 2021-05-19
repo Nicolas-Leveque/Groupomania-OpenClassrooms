@@ -58,7 +58,7 @@ exports.getUserPosts = async (req, res) => {
 
 exports.getAllposts = async (req, res) => {
     try {
-        const posts = await Post.sequelize.query('SELECT posts.id, type_post, titre, contenu, DATE_FORMAT(posts.createdAt, "le %e/%m/%Y à %H:%i") AS creation, DATE_FORMAT(posts.updatedAt, "le %e/%m/%Y à %H:%i") AS mise_a_jour,firstName, lastName, imageData  FROM posts JOIN users ON posts.userId = users.id ORDER BY creation DESC', {type: QueryTypes.SELECT})
+        const posts = await Post.sequelize.query('SELECT posts.id, type_post, titre, posts.contenu, DATE_FORMAT(posts.createdAt, "le %e/%m/%Y à %H:%i") AS creation, DATE_FORMAT(posts.updatedAt, "le %e/%m/%Y à %H:%i") AS mise_a_jour,firstName, lastName, imageData, COUNT(postID) AS nbr_comments FROM posts JOIN users ON posts.userId = users.id LEFT JOIN comments ON posts.id = comments.postId GROUP BY posts.id ORDER BY creation DESC', {type: QueryTypes.SELECT})
         .then(posts => {
             posts.map(post => {
                 const userImage = post.imageData.toString('base64')

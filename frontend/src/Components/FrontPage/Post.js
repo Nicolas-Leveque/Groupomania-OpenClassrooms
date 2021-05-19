@@ -16,6 +16,7 @@ const Post = (props) => {
             <div className="post-info">
                 <h3 className="titre-post">{props.titre}</h3>
                 <p className="corps-post">{props.contenu}</p>
+                <p className="nbre-comments">{props.nbrComment} Commentaires</p>
             </div>
         </div>
     )

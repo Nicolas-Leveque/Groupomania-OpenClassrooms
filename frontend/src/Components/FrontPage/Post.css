@@ -8,7 +8,6 @@
 .utilisateur-info {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
 }
 .utilisateur-info p {
     margin: 0;
@@ -36,6 +35,10 @@
 
 .titre-post {
     align-self: center;
+}
+
+.nbre-comments {
+    font-size: 12px;
 }
 
 .post-info {
