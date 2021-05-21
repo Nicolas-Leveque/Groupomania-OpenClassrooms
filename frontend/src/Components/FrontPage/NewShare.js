@@ -1,9 +1,11 @@
-import React, { useState} from 'react'
+import React, { useState, useContext } from 'react'
 import './ShareForm.css'
+import { AuthContext } from '../../Contexts/AuthContext'
 
 const NewShare = (props) => {
     const [title, setTitle] = useState('')
     const [content, setContent] = useState('')
+    const { token, userId } = useContext( AuthContext )
 
     const createPost = (e) => {
         e.preventDefault()
@@ -11,11 +13,11 @@ const NewShare = (props) => {
             titre: title,
             contenu: content,
             type_post: "text",
-            userId: localStorage.getItem('id')
+            userId: userId
         }
         const myHeaders = new Headers({
             'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + localStorage.getItem('token')
+            'Authorization': 'Bearer ' + token
         })
         fetch('http://localhost:3000/post', {
             method:'post',

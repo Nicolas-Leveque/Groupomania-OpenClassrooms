@@ -1,22 +1,20 @@
-import React from 'react'
-
+import React, { useContext } from 'react'
+import LoginRegister from './LoginRegister'
+import FrontPage from '../FrontPage/FrontPage'
+import { AuthContext } from '../../Contexts/AuthContext'
 import './Content.css';
 
-class Content extends React.Component {
-    constructor(props) {
-        super(props);
-        this.rerenderParentCallback = this.rerenderParentCallback.bind(this)
-    }
-    rerenderParentCallback() {
-        this.forceUpdate()
-    }
-
-    render() {
-        return (
-            <div className="content" >
-                {this.props.children}
-            </div>
-        )
-    }
+const Content = (props) => {
+const { isAuthenticated } = useContext(AuthContext)
+    return (  
+        <div className="content" >
+            {props.children}
+            {!localStorage.getItem('token')
+                ? <LoginRegister /> 
+                : <FrontPage />}
+        </div>
+    );
 }
+
+
 export default Content;

@@ -1,8 +1,9 @@
 import React from 'react'
+import { AuthContext } from '../../Contexts/AuthContext'
 import './LoginRegister.css'
 
 class RegisterBox extends React.Component {
-    
+    static contextType = AuthContext
     constructor(props) {
         super(props)
         this.state = { email:'', firstName:'', lastName:'', password:''}
@@ -28,7 +29,10 @@ class RegisterBox extends React.Component {
             .then((response) => response.json())
             .then(json => {
                 localStorage.setItem('token', json.token)
-                console.log(json.token)
+                this.context.setToken( json.token )
+                this.context.setUserId( json.user.id )
+                this.context.setisAuthenticated( true )
+                console.log(this.context)
             })
     }
     

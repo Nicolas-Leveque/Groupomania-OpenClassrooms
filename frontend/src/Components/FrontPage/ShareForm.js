@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import NewShare from './NewShare'
 import './ShareForm.css'
 
-const ShareForm = (props) => {
+const ShareForm = () => {
     const [isFormVisible, setIsFormVisible] = useState(false)
     const showForm = () => {
         setIsFormVisible(true)

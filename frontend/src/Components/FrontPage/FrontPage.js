@@ -1,16 +1,17 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import "./FrontPage.css"
-
+import { AuthContext } from '../../Contexts/AuthContext'
 import ShareForm from '../FrontPage/ShareForm'
 import Post from '../FrontPage/Post'
 
-const FrontPage = (props) => {
+const FrontPage = () => {
     const [data, setData] = useState([])
-    
+    const { token } = useContext( AuthContext )
+    console.log( token )
     useEffect( () => {
         const myHeaders = new Headers({
             'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + localStorage.getItem('token')
+            'Authorization': 'Bearer ' + token
         })
         function fetchData() {
             fetch('http://localhost:3000/post', {
