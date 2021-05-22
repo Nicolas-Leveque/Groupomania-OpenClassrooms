@@ -31,8 +31,6 @@ class RegisterBox extends React.Component {
                 localStorage.setItem('token', json.token)
                 this.context.setToken( json.token )
                 this.context.setUserId( json.user.id )
-                this.context.setisAuthenticated( true )
-                console.log(this.context)
             })
     }
     

@@ -16,7 +16,8 @@ class LoginBox extends React.Component {
         const myHeaders = new Headers({
             'Content-Type': 'application/json'
         })
-        fetch('http://localhost:3000/login', {
+        try {
+            fetch('http://localhost:3000/login', {
             method:'post',
             headers: myHeaders,
             body: JSON.stringify(loginRequest)
@@ -24,51 +25,48 @@ class LoginBox extends React.Component {
             .then((response) => response.json())
             .then(json => {
                 localStorage.setItem('token', json.token)
-                // localStorage.setItem('id', json.user.id)
                 this.context.setToken( json.token )
                 this.context.setUserId( json.user.id )
-                this.context.setisAuthenticated( true )
-                console.log(this.context)
-            })
+            })}
+        catch (e) {
+            console.log(e)
+            return
+        }
+            
             
     }
 
     
 
     render() {
-        // const { token, setToken, userId, setUserId, isAuthenticated, setisAuthenticated } = this.context
-        
         return (
-            
             <div className="inner-container">
-                        <div className="header">Login</div>
-                        <form className="box" onSubmit={this.submitLogin}>
-                            <div className="input-group">
-                                <label htmlFor="email">Email</label>
-                                <input 
-                                type="text"
-                                onChange={(e) => this.setState({ email: e.target.value })}
-                                name="email"
-                                className="login-input"
-                                placeholder="Email"/>
-                            </div>
-                            <div className="input-group">
-                                <label htmlFor="password">Password</label>
-                                <input 
-                                type="password"
-                                onChange={(e) => this.setState({ password: e.target.value })}
-                                name="password"
-                                className="login-input"
-                                placeholder="Password"/>
-                            </div>
-                            <button
-                                type="submit"
-                                value="Submit"
-                                className="login-btn"
-                                >Login</button>
-                        </form>
+                <div className="header">Login</div>
+                <form className="box" onSubmit={this.submitLogin}>
+                    <div className="input-group">
+                        <label htmlFor="email">Email</label>
+                        <input 
+                            type="email"
+                            onChange={(e) => this.setState({ email: e.target.value })}
+                            name="email"
+                            className="login-input"
+                            placeholder="Email"/>
                     </div>
-            
+                    <div className="input-group">
+                        <label htmlFor="password">Password</label>
+                        <input 
+                            type="password"
+                            onChange={(e) => this.setState({ password: e.target.value })}
+                            name="password"
+                            className="login-input"
+                            placeholder="Password"/>
+                    </div>
+                    <button
+                        type="submit"
+                        value="Submit"
+                        className="login-btn"                        >Login</button>
+                </form>
+            </div>
         )
     }
 }

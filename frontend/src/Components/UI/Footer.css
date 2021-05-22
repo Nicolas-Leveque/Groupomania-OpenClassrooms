@@ -3,7 +3,7 @@ footer {
     color: #fff;
     display: flex;
     justify-content: center;
-    position: sticky;
+    position: fixed;
     bottom: 0;
     width: 100%;
     font-size: 12px;

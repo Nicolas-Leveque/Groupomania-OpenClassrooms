@@ -6,12 +6,11 @@ import Post from '../FrontPage/Post'
 
 const FrontPage = () => {
     const [data, setData] = useState([])
-    const { token } = useContext( AuthContext )
-    console.log( token )
+    const { setReload } = useContext( AuthContext )
     useEffect( () => {
         const myHeaders = new Headers({
             'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + token
+            'Authorization': 'Bearer ' + localStorage.getItem('token')
         })
         function fetchData() {
             fetch('http://localhost:3000/post', {
@@ -20,6 +19,8 @@ const FrontPage = () => {
                 }).then(response => response.json())
                 .then(json => {
                     setData( json )
+                    setReload( true )
+
                 })
         }
         fetchData()

@@ -4,11 +4,11 @@ import FrontPage from '../FrontPage/FrontPage'
 import { AuthContext } from '../../Contexts/AuthContext'
 import './Content.css';
 
-const Content = (props) => {
-const { isAuthenticated } = useContext(AuthContext)
+const Content = () => {
+const { reload } = useContext(AuthContext)
     return (  
         <div className="content" >
-            {props.children}
+            {console.log(reload)}
             {!localStorage.getItem('token')
                 ? <LoginRegister /> 
                 : <FrontPage />}

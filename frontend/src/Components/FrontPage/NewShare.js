@@ -5,7 +5,7 @@ import { AuthContext } from '../../Contexts/AuthContext'
 const NewShare = (props) => {
     const [title, setTitle] = useState('')
     const [content, setContent] = useState('')
-    const { token, userId } = useContext( AuthContext )
+    const {  userId } = useContext( AuthContext )
 
     const createPost = (e) => {
         e.preventDefault()
@@ -17,7 +17,7 @@ const NewShare = (props) => {
         }
         const myHeaders = new Headers({
             'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + token
+            'Authorization': 'Bearer ' + localStorage.getItem('token')
         })
         fetch('http://localhost:3000/post', {
             method:'post',
