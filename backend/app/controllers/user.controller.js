@@ -52,7 +52,14 @@ exports.login = async ( req, res) => {
 
 exports.getUser = async (req, res) => {
     try {
-        res.status(200).send(req.user)
+        const user = await User.findByPk(req.user.id)
+        const userImage = await user.imageData.toString('base64')
+        user.imageData = userImage
+        console.log(user)
+        if(!user) {
+            res.status(404).send()
+        }
+        res.status(200).send(user)
     }catch(e) {
         res.status(400).send(e)
     }

@@ -38,6 +38,7 @@ const FrontPage = () => {
                         createdAt={data.creation}
                         contenu={data.contenu}
                         avatar={data.imageData}
+                        typeImage={data.imageType}
                         key={data.id}
                         nbrComment={data.nbr_comments}
                     />

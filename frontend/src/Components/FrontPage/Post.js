@@ -6,7 +6,7 @@ const Post = (props) => {
         <div className="post-container">
             <div className="utilisateur-info">
                 <div className="photo-profil">
-                    <img src={`data:image/jpeg;base64,${props.avatar}`} alt="profil" />
+                    <img src={`data:${props.typeImage};base64,${props.avatar}`} alt="profil" />
                 </div>
                 <div className="info-partage">
                     <p className="nom-utilsateur">{props.firstName} {props.lastName}</p>
