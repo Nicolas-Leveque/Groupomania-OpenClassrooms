@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useContext } from 'react'
 import "./FrontPage.css"
-import { AuthContext } from '../../Contexts/AuthContext'
 import ShareForm from '../FrontPage/ShareForm'
+import { AuthContext } from '../../Contexts/AuthContext'
 import Post from '../FrontPage/Post'
 
 const FrontPage = () => {
     const [data, setData] = useState([])
-    const { setReload } = useContext( AuthContext )
+    const { reload } = useContext(AuthContext)
     useEffect( () => {
         const myHeaders = new Headers({
             'Content-Type': 'application/json',
@@ -19,13 +19,11 @@ const FrontPage = () => {
                 }).then(response => response.json())
                 .then(json => {
                     setData( json )
-                    setReload( true )
-
                 })
         }
         fetchData()
         // eslint-disable-next-line
-    }, [])
+    }, [ reload ])
     return (
         <div className="frontpage" >
                 <ShareForm />

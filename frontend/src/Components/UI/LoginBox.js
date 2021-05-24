@@ -25,6 +25,7 @@ class LoginBox extends React.Component {
             .then((response) => response.json())
             .then(json => {
                 localStorage.setItem('token', json.token)
+                localStorage.setItem('id', json.user.id)
                 this.context.setToken( json.token )
                 this.context.setUserId( json.user.id )
             })}

@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import './UserProfil.css'
+import FormProfil from './FormProfil'
 
 const UserProfil = () => {
-    const [data, setData] = useState([])
+    const [ data, setData ] = useState([])
     useEffect( () => {
         const myHeaders = new Headers({
             'Content-Type': 'application/json',
@@ -22,6 +23,7 @@ const UserProfil = () => {
         fetchData()
         // eslint-disable-next-line
     }, [])
+    
     return (
         <div className='user-profil'>
             <h2>{data.fullName}</h2>
@@ -31,17 +33,7 @@ const UserProfil = () => {
                     <img src={`data:${data.imageType};base64,${data.imageData}`} alt="profil" />
                     <button>Choisir une photo</button>
                 </div>
-                <form className='form-profil' disabled>
-                    <label htmlFor="nom">Nom</label>
-                    <input type="text" id="nom" />
-                    <label htmlFor="prenom">Prenom</label>
-                    <input type="text" id="pernom" />
-                    <label htmlFor="email">Email</label>
-                    <input type="email" id="email" />
-                    <label htmlFor="password">Mot de passe</label>
-                    <input type="password" id="password" />
-                </form>
-                {/* {console.log(data)} */}
+                <FormProfil data={data}/>
             </div>
         </div>
     );
