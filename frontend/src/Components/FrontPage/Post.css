@@ -45,6 +45,11 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    
+}
+
+.post-info a {
+    color: #000;
 }
 
 .photo-post {

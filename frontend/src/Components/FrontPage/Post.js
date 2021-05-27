@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import './Post.css'
 
 
@@ -13,11 +14,15 @@ const Post = (props) => {
                     <p className="heure-post">{props.createdAt}</p>
                 </div>
             </div>
-            <div className="post-info">
-                <h3 className="titre-post">{props.titre}</h3>
-                <p className="corps-post">{props.contenu}</p>
-                <p className="nbre-comments">{props.nbrComment} Commentaires</p>
-            </div>
+                <div className="post-info">
+                <Link to={`/post/${props.id}`} data={props.id}>
+                    <h3 className="titre-post">{props.titre}</h3>
+                    <p className="corps-post">{props.contenu}</p>
+                </Link>
+                    <p className="nbre-comments">{props.nbrComment} Commentaires</p>
+                
+                </div>
+            
         </div>
     )
 }

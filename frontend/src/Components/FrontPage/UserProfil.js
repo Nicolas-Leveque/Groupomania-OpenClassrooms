@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import './UserProfil.css'
 import FormProfil from './FormProfil'
+import FormAvatar from './FormAvatar'
 
 const UserProfil = () => {
     const [ data, setData ] = useState([])
+    const [ showFormPicture, setShowFormPicture ] = useState(false)
     useEffect( () => {
         const myHeaders = new Headers({
             'Content-Type': 'application/json',
@@ -23,6 +25,10 @@ const UserProfil = () => {
         fetchData()
         // eslint-disable-next-line
     }, [])
+    const handleShowFormPicture = (e) => {
+        e.preventDefault()
+        setShowFormPicture(!showFormPicture)
+    }
     
     return (
         <div className='user-profil'>
@@ -31,7 +37,8 @@ const UserProfil = () => {
             <div className='user-container'>
                 <div className='profil-photo'>
                     <img src={`data:${data.imageType};base64,${data.imageData}`} alt="profil" />
-                    <button>Choisir une photo</button>
+                    <button onClick={handleShowFormPicture}>Choisir une photo</button>
+                    {showFormPicture && <FormAvatar /> }
                 </div>
                 <FormProfil data={data}/>
             </div>

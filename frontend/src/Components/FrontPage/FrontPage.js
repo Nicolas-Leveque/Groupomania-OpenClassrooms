@@ -6,7 +6,7 @@ import Post from '../FrontPage/Post'
 
 const FrontPage = () => {
     const [data, setData] = useState([])
-    const { reload } = useContext(AuthContext)
+    const { reload, setReload } = useContext(AuthContext)
     useEffect( () => {
         const myHeaders = new Headers({
             'Content-Type': 'application/json',
@@ -22,6 +22,7 @@ const FrontPage = () => {
                 })
         }
         fetchData()
+        setReload( false )
         // eslint-disable-next-line
     }, [ reload ])
     return (
@@ -38,6 +39,7 @@ const FrontPage = () => {
                         avatar={data.imageData}
                         typeImage={data.imageType}
                         key={data.id}
+                        id={data.id}
                         nbrComment={data.nbr_comments}
                     />
                 ) )}

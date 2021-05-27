@@ -1,6 +1,7 @@
 const express = require('express')
 const db = require('../models')
 const Comment = db.comments
+const User = db.users
 const Op = db.Sequelize.Op
 
 const router = new express.Router()
@@ -45,7 +46,8 @@ exports.getOneComment = async (req, res) => {
 exports.getPostComments = async (req, res) => {
     try {
         const comment = await Comment.findAll({
-            where: {postId: req.params.id}
+            where: {postId: req.params.id},
+            include: { model: User, as: 'user' }
         })
         if (!comment) {
             res.status(404).send()

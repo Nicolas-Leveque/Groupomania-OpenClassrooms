@@ -17,6 +17,7 @@ db.posts = require('./posts.model')(sequelize, Sequelize)
 db.comments = require('./comments.model')(sequelize, Sequelize)
 
 db.users.hasMany(db.posts, { as: "posts" })
+db.users.hasMany(db.comments, { as: "comments" })
 db.posts.hasMany(db.comments, { as: "comments" })
 
 db.posts.belongsTo(db.users, { 

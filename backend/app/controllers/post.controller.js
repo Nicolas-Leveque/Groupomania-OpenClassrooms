@@ -32,7 +32,14 @@ exports.modifyPost = async (req, res) => {
 exports.getOnePost = async (req, res) => {
     try {
         const id = req.params.id
-        const post = await Post.findByPk(id)
+        const post = await Post.sequelize.query(`SELECT posts.id, type_post, titre, posts.contenu, DATE_FORMAT(posts.createdAt, "le %e/%m/%Y à %H:%i") AS creation, DATE_FORMAT(posts.updatedAt, "le %e/%m/%Y à %H:%i") AS mise_a_jour,firstName, lastName, imageType, imageData, COUNT(postID) AS nbr_comments FROM posts JOIN users ON posts.userId = users.id LEFT JOIN comments ON posts.id = comments.postId WHERE posts.id = ${id}`, {type: QueryTypes.SELECT})
+        .then(post => {
+            post.map(post => {
+                const userImage = post.imageData.toString('base64')
+                post['imageData'] = userImage
+            })
+            return post
+        })
         if(!post) {
             res.status(404).send()
         }
