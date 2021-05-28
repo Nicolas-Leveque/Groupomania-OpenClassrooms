@@ -1,0 +1,33 @@
+.detail-post {
+    align-self: center;
+    width: 80%;
+}
+
+.trigger-comment-form {
+    align-self: center;
+    width: 90%;
+    height: 5vh;
+    background-color: #fff;
+    color: #111;
+}
+
+.comment-input {
+    width: 80%;
+    border-radius: 15px;
+    margin-bottom: 3%;
+    line-height: 1.5rem;
+}
+
+.comment-controls {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+
+}
+
+@media all and (min-width:800px) {
+    .detail-post {
+        width: 60%;
+    }
+}

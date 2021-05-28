@@ -4,6 +4,7 @@ import { AuthContext } from '../../Contexts/AuthContext'
 import Comment from './Comment'
 import CommentForm from './CommentForm'
 import Post from './Post'
+import './Detailpost.css'
 
 const DetailPost = () => {
     const { postId } = useParams()
@@ -60,7 +61,7 @@ const DetailPost = () => {
                 id={postData.id}
                 nbrComment={postData.nbr_comments}
             />
-            {!showCommentForm && <button onClick={handleCommentForm} >Laisser un commentaire</button>}
+            {!showCommentForm && <button className="trigger-comment-form" onClick={handleCommentForm} >Laisser un commentaire</button>}
             {showCommentForm && <CommentForm onCancel={hideCommentForm} post={postId}/>}
             {commentData.map((data) => (
                 <Comment

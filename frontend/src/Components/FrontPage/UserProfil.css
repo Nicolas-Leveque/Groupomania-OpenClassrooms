@@ -4,8 +4,8 @@ button {
 .user-profil {
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
+    justify-content: center;
+    align-items: center;
     width: 80%;
     align-self: center;
     height: 100%;
@@ -84,5 +84,12 @@ button {
         margin: auto;
         justify-content: center;
         align-items: center;
+    }
+}
+
+@media all and (min-width: 1200px) {
+    .user-container {
+        align-self: center;
+        width: 70%;
     }
 }

@@ -26,10 +26,11 @@ const CommentForm = (props) => {
     }
     return (  
         <form onSubmit={createComment}>
-            <input type="text" onChange={e => setCommentData(e.target.value)}/>
-            
-            <button>Envoyer</button>
-            <button onClick={props.onCancel}>Annuler</button>
+            <input className="comment-input" type="text" onChange={e => setCommentData(e.target.value)}/>
+            <div className="comment-controls">
+                <button type="submit" >Envoyer</button>
+                <button onClick={props.onCancel}>Annuler</button>
+            </div>
         </form>
     );
 }

@@ -34,6 +34,7 @@ const UserProfil = () => {
         <div className='user-profil'>
             <h2>{data.fullName}</h2>
             <p>Inscrit depuis {data.createdAt}</p>
+            
             <div className='user-container'>
                 <div className='profil-photo'>
                     <img src={`data:${data.imageType};base64,${data.imageData}`} alt="profil" />
