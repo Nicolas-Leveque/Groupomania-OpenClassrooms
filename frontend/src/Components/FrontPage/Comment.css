@@ -4,6 +4,16 @@
 
 }
 
-.comment-nom {
+.comment-profil {
+    display: flex;
     margin-left: 5%;
+}
+
+#photo-profil {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    margin: 2%;
+
+
 }

@@ -63,10 +63,13 @@ const DetailPost = () => {
             />
             {!showCommentForm && <button className="trigger-comment-form" onClick={handleCommentForm} >Laisser un commentaire</button>}
             {showCommentForm && <CommentForm onCancel={hideCommentForm} post={postId}/>}
+            {console.log(commentData)}
             {commentData.map((data) => (
                 <Comment
                     key={data.id}
-                    name={data.user.fullName}
+                    typeImage={data.imageType}
+                    avatar={data.imageData}
+                    name={`${data.firstName } ${data.lastName}`}
                     contenu={data.contenu}
                 />
             ) )}

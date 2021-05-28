@@ -4,23 +4,26 @@ const FormAvatar = () => {
     const [ newProfilPic, setNewProfilPic ] = useState()
     const handleSetProfilPicture = (e) => {
         e.preventDefault();
+        
         const myHeaders = new Headers({
+            'Accept': 'multipart/form-data',
             'Content-Type': 'application/json',
             'Authorization': 'Bearer ' + localStorage.getItem('token')
         })
         
         function setProfilPicture() {
             const data = new FormData() 
-            data.append('file', newProfilPic, newProfilPic.name)
+            data.append('image', newProfilPic, newProfilPic.name)
             
             console.log( 'file', data)
             fetch(`http://localhost:3000/user/avatar`, {
                 method: 'put',
                 headers: myHeaders,
-                body: <datagrid></datagrid>
+                body: data
             }).then(res => console.log(res))
         }
         setProfilPicture()
+        console.log('state', newProfilPic)
         
     }
     return (  
