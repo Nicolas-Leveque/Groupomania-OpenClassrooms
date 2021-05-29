@@ -14,7 +14,13 @@ app.use(bodyParser.urlencoded({ extended: true}))
 const db = require('./app/models')
 db.sequelize.sync()
 
-app.use(cors())
+const corsOptions = {
+    origin: '*',
+    "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
+    optionsSuccessStatus: 200 
+    }
+
+app.use(cors(corsOptions))
 
 app.use(userRouter)
 app.use(postRouter)

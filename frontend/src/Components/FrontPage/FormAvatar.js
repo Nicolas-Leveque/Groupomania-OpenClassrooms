@@ -6,18 +6,16 @@ const FormAvatar = () => {
         e.preventDefault();
         
         const myHeaders = new Headers({
-            'Accept': 'multipart/form-data',
-            'Content-Type': 'application/json',
             'Authorization': 'Bearer ' + localStorage.getItem('token')
         })
         
         function setProfilPicture() {
             const data = new FormData() 
-            data.append('image', newProfilPic, newProfilPic.name)
+            data.append('imageData', newProfilPic)
             
             console.log( 'file', data)
             fetch(`http://localhost:3000/user/avatar`, {
-                method: 'put',
+                method: 'post',
                 headers: myHeaders,
                 body: data
             }).then(res => console.log(res))
@@ -28,7 +26,7 @@ const FormAvatar = () => {
     }
     return (  
         <div className="form-avatar">
-            <input type="file" id="avatar" name="avatar" accept=".jpg, .jpeg, .png" onChange={(e) => {setNewProfilPic(e.target.files[0])}} />
+            <input type="file" id="avatar" name="imageData" accept=".jpg, .jpeg, .png" onChange={(e) => {setNewProfilPic(e.target.files[0])}} />
             <button onClick={handleSetProfilPicture}>Envoyer</button>
         </div>
     );

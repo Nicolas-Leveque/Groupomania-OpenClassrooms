@@ -13,7 +13,6 @@ const Content = () => {
     }, [ reload, setReload ])
     return (  
         <div className="content" >
-            {console.log(reload)}
             {!localStorage.getItem('token')
                 ? <LoginRegister /> 
                 : <FrontPage />}

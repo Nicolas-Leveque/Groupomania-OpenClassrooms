@@ -8,7 +8,7 @@ router.post('/signup', userCtrl.signup)
 router.post('/login', userCtrl.login)
 router.get('/user/me', auth, userCtrl.getUser)
 router.delete('/:id',auth, userCtrl.deleteUser)
-router.put('/user/avatar', auth, upload.single('imageData'), userCtrl.uploadAvatar)
+router.post('/user/avatar', auth, upload.single('imageData'), userCtrl.uploadAvatar)
 router.put('/user/:id', auth, userCtrl.modifyUser)
 
 module.exports = router
