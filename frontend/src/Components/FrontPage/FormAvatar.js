@@ -12,8 +12,6 @@ const FormAvatar = () => {
         function setProfilPicture() {
             const data = new FormData() 
             data.append('imageData', newProfilPic)
-            
-            console.log( 'file', data)
             fetch(`http://localhost:3000/user/avatar`, {
                 method: 'post',
                 headers: myHeaders,

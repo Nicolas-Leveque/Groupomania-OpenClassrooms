@@ -56,7 +56,9 @@ const DetailPost = () => {
                 createdAt={postData.creation}
                 contenu={postData.contenu}
                 avatar={postData.imageData}
-                typeImage={postData.imageType}
+                typeAvatar={postData.imageType}
+                typeImgPost={postData.postImgType}
+                postPicture={postData.postImgData}
                 key={postData.id}
                 id={postData.id}
                 nbrComment={postData.nbr_comments}

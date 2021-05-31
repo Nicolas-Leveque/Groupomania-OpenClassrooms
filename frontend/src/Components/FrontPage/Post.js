@@ -7,7 +7,7 @@ const Post = (props) => {
         <div className="post-container">
             <div className="utilisateur-info">
                 <div className="photo-profil">
-                    <img src={`data:${props.typeImage};base64,${props.avatar}`} alt="profil" />
+                    <img className="profil-pic" src={`data:${props.typeAvatar};base64,${props.avatar}`} alt="profil" />
                 </div>
                 <div className="info-partage">
                     <p className="nom-utilsateur">{props.firstName} {props.lastName}</p>
@@ -17,6 +17,7 @@ const Post = (props) => {
                 <div className="post-info">
                 <Link to={`/post/${props.id}`} data={props.id}>
                     <h3 className="titre-post">{props.titre}</h3>
+                    {props.postPicture && <img className="post-pic" src={`data:${props.typeImgPost};base64,${props.postPicture}`} alt={`post n°${props.id}`}/>}
                     <p className="corps-post">{props.contenu}</p>
                 </Link>
                     <p className="nbre-comments">{props.nbrComment} Commentaires</p>

@@ -18,7 +18,7 @@ exports.signup = async (req, res) => {
         }
 
         const user = await User.create(userInformation)
-        const token = jwt.sign({ id: user.dataValues.id.toString() }, process.env.JWT_TOKEN, { expiresIn: 86400 })
+        const token = jwt.sign({ id: user.dataValues.id.toString() }, process.env.JWT_TOKEN, { expiresIn: 604800 })
         res.status(201).send({ user, token })
     } catch (e) {
         console.log(e)
@@ -41,7 +41,7 @@ exports.login = async ( req, res) => {
         if (!isMatch) {
             throw new Error('Erreur de connexion, veuillez réessayer')
         }
-        const token = jwt.sign({ id: user.id.toString() }, process.env.JWT_TOKEN, { expiresIn: 86400 })
+        const token = jwt.sign({ id: user.id.toString() }, process.env.JWT_TOKEN, { expiresIn: 604800 })
         res.status(200).send({ user, token })
 
     } catch(e) {
@@ -85,14 +85,12 @@ exports.modifyUser = async (req, res) => {
         res.status(200).json({message: "Utilisateur modifié"})
 
     }catch(e) {
-        console.log(e)
         res.status(500).send(e)
     }
 }
 
 exports.uploadAvatar = async (req, res) => {
     try {
-        console.log(req.file)
         await User.update({
             imageType: req.file.mimetype,
             imageName: req.file.originalname,
@@ -103,7 +101,6 @@ exports.uploadAvatar = async (req, res) => {
             })
         res.status(201).json({ message: "avatar en ligne" })
     } catch (e) {
-        console.log(e)
         res.status(400).send(e)
     }
 }

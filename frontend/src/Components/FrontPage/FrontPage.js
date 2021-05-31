@@ -28,7 +28,6 @@ const FrontPage = () => {
     return (
         <div className="frontpage" >
                 <ShareForm />
-                
                 {data.map((data) => (
                     <Post 
                         firstName={data.firstName}
@@ -37,7 +36,9 @@ const FrontPage = () => {
                         createdAt={data.creation}
                         contenu={data.contenu}
                         avatar={data.imageData}
-                        typeImage={data.imageType}
+                        typeAvatar={data.imageType}
+                        typeImgPost={data.postImgType}
+                        postPicture={data.postImgData}
                         key={data.id}
                         id={data.id}
                         nbrComment={data.nbr_comments}

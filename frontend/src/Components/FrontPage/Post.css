@@ -52,7 +52,13 @@
     color: #000;
 }
 
-.photo-post {
-    width: 90%;
+.post-pic {
+    width: 50vw;
     height: auto;
+}
+
+@media all and (max-width: 800px) {
+    .post-pic {
+        width: 80vw;
+    }
 }

@@ -10,7 +10,11 @@ form {
     width: 100%;
     
 }
+.group-trigger {
+    display: flex;
+    width: 90%;
 
+}
 .input-group {
     display: flex;
     flex-direction: column;

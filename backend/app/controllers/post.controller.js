@@ -15,6 +15,23 @@ exports.createPost = async (req, res) => {
     }
 }
 
+exports.createPicturePost = async (req, res) => {
+    try {
+        console.log(req.file)
+        await Post.create({
+            titre: req.body.titre,
+            userId: req.body.userId,
+            imageType: req.file.mimetype,
+            imageName: req.file.originalname,
+            imageData: req.file.buffer,
+        })
+        res.status(201).json({ message: "Post created" })
+    } catch (e) {
+        console.log(e)
+        res.status(400).send(e)
+    }
+}
+
 exports.modifyPost = async (req, res) => {
     try {
         const post = await Post.update( req.body, {
@@ -32,11 +49,17 @@ exports.modifyPost = async (req, res) => {
 exports.getOnePost = async (req, res) => {
     try {
         const id = req.params.id
-        const post = await Post.sequelize.query(`SELECT posts.id, type_post, titre, posts.contenu, DATE_FORMAT(posts.createdAt, "le %e/%m/%Y à %H:%i") AS creation, DATE_FORMAT(posts.updatedAt, "le %e/%m/%Y à %H:%i") AS mise_a_jour,firstName, lastName, imageType, imageData, COUNT(postID) AS nbr_comments FROM posts JOIN users ON posts.userId = users.id LEFT JOIN comments ON posts.id = comments.postId WHERE posts.id = ${id}`, {type: QueryTypes.SELECT})
+        const post = await Post.sequelize.query(`SELECT posts.id, titre, posts.contenu, DATE_FORMAT(posts.createdAt, "le %e/%m/%Y à %H:%i") AS creation, posts.imageType AS postImgType , posts.imageData as postImgData, firstName, lastName, users.imageType, users.imageData, COUNT(postID) AS nbr_comments FROM posts JOIN users ON posts.userId = users.id LEFT JOIN comments ON posts.id = comments.postId WHERE posts.id = ${id}`, {type: QueryTypes.SELECT})
         .then(post => {
             post.map(post => {
                 const userImage = post.imageData.toString('base64')
                 post['imageData'] = userImage
+                if(post.postImgData ) {
+                    const postImage = post.postImgData.toString('base64')
+                    post['postImgData'] = postImage
+                } else {
+                    return
+                }
             })
             return post
         })
@@ -65,16 +88,24 @@ exports.getUserPosts = async (req, res) => {
 
 exports.getAllposts = async (req, res) => {
     try {
-        const posts = await Post.sequelize.query('SELECT posts.id, type_post, titre, posts.contenu, DATE_FORMAT(posts.createdAt, "le %e/%m/%Y à %H:%i") AS creation, DATE_FORMAT(posts.updatedAt, "le %e/%m/%Y à %H:%i") AS mise_a_jour,firstName, lastName, imageType, imageData, COUNT(postID) AS nbr_comments FROM posts JOIN users ON posts.userId = users.id LEFT JOIN comments ON posts.id = comments.postId GROUP BY posts.id ORDER BY creation DESC', {type: QueryTypes.SELECT})
+        const posts = await Post.sequelize.query('SELECT posts.id, titre, posts.contenu, DATE_FORMAT(posts.createdAt, "le %e/%m/%Y à %H:%i") AS creation, posts.imageType AS postImgType, posts.imageData AS postImgData, firstName, lastName, users.imageType, users.imageData, COUNT(postID) AS nbr_comments FROM posts JOIN users ON posts.userId = users.id LEFT JOIN comments ON posts.id = comments.postId GROUP BY posts.id ORDER BY creation DESC', {type: QueryTypes.SELECT})
         .then(posts => {
+            
             posts.map(post => {
                 const userImage = post.imageData.toString('base64')
-                post['imageData'] = userImage
+                post['imageData'] = userImage  
+                if(post.postImgData ) {
+                    const postImage = post.postImgData.toString('base64')
+                    post['postImgData'] = postImage
+                } else {
+                    return
+                }
             })
             return posts
         })
         res.status(200).send(posts)
     } catch(e) {
+        console.log(e)
         res.status(400).send(e)
     }
 }
