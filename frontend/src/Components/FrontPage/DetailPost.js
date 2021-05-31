@@ -49,7 +49,8 @@ const DetailPost = () => {
     }
     return (  
         <div className="detail-post">
-            <Post 
+            <Post
+                userId={postData.userId}
                 firstName={postData.firstName}
                 lastName={postData.lastName}
                 titre={postData.titre}
@@ -68,6 +69,8 @@ const DetailPost = () => {
             {commentData.map((data) => (
                 <Comment
                     key={data.id}
+                    userId={data.userId}
+                    id={data.id}
                     typeImage={data.imageType}
                     avatar={data.imageData}
                     name={`${data.firstName } ${data.lastName}`}

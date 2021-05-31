@@ -27,7 +27,6 @@ exports.createPicturePost = async (req, res) => {
         })
         res.status(201).json({ message: "Post created" })
     } catch (e) {
-        console.log(e)
         res.status(400).send(e)
     }
 }
@@ -49,7 +48,7 @@ exports.modifyPost = async (req, res) => {
 exports.getOnePost = async (req, res) => {
     try {
         const id = req.params.id
-        const post = await Post.sequelize.query(`SELECT posts.id, titre, posts.contenu, DATE_FORMAT(posts.createdAt, "le %e/%m/%Y à %H:%i") AS creation, posts.imageType AS postImgType , posts.imageData as postImgData, firstName, lastName, users.imageType, users.imageData, COUNT(postID) AS nbr_comments FROM posts JOIN users ON posts.userId = users.id LEFT JOIN comments ON posts.id = comments.postId WHERE posts.id = ${id}`, {type: QueryTypes.SELECT})
+        const post = await Post.sequelize.query(`SELECT posts.userId, posts.id, posts.titre, posts.contenu, DATE_FORMAT(posts.createdAt, "le %e/%m/%Y à %H:%i") AS creation, posts.imageType AS postImgType , posts.imageData as postImgData, users.firstName, users.lastName, users.admin, users.imageType, users.imageData, COUNT(postID) AS nbr_comments FROM posts JOIN users ON posts.userId = users.id LEFT JOIN comments ON posts.id = comments.postId WHERE posts.id = ${id}`, {type: QueryTypes.SELECT})
         .then(post => {
             post.map(post => {
                 const userImage = post.imageData.toString('base64')
@@ -88,7 +87,7 @@ exports.getUserPosts = async (req, res) => {
 
 exports.getAllposts = async (req, res) => {
     try {
-        const posts = await Post.sequelize.query('SELECT posts.id, titre, posts.contenu, DATE_FORMAT(posts.createdAt, "le %e/%m/%Y à %H:%i") AS creation, posts.imageType AS postImgType, posts.imageData AS postImgData, firstName, lastName, users.imageType, users.imageData, COUNT(postID) AS nbr_comments FROM posts JOIN users ON posts.userId = users.id LEFT JOIN comments ON posts.id = comments.postId GROUP BY posts.id ORDER BY creation DESC', {type: QueryTypes.SELECT})
+        const posts = await Post.sequelize.query('SELECT posts.userId, posts.id, posts.titre, posts.contenu, DATE_FORMAT(posts.createdAt, "le %e/%m/%Y à %H:%i") AS creation, posts.imageType AS postImgType, posts.imageData AS postImgData, users.firstName, users.lastName, users.admin, users.imageType, users.imageData, COUNT(postID) AS nbr_comments FROM posts JOIN users ON posts.userId = users.id LEFT JOIN comments ON posts.id = comments.postId GROUP BY posts.id ORDER BY creation DESC', {type: QueryTypes.SELECT})
         .then(posts => {
             
             posts.map(post => {

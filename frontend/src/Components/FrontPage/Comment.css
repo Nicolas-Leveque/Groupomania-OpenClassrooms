@@ -17,3 +17,8 @@
 
 
 }
+
+.comment-control {
+    display: flex;
+    justify-content: space-evenly;
+}

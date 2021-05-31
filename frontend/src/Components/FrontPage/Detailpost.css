@@ -1,6 +1,8 @@
 .detail-post {
     align-self: center;
     width: 80%;
+    height: 80vh;
+    overflow-y: scroll;
 }
 
 .trigger-comment-form {

@@ -28,17 +28,12 @@ class LoginBox extends React.Component {
                 localStorage.setItem('id', json.user.id)
                 this.context.setToken( json.token )
                 this.context.setUserId( json.user.id )
+                this.context.setIsAdmin( json.user.admin )
             })}
         catch (e) {
-            console.log(e)
             return
         }
-            
-            
     }
-
-    
-
     render() {
         return (
             <div className="inner-container">

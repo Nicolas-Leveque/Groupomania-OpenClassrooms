@@ -21,7 +21,6 @@ exports.signup = async (req, res) => {
         const token = jwt.sign({ id: user.dataValues.id.toString() }, process.env.JWT_TOKEN, { expiresIn: 604800 })
         res.status(201).send({ user, token })
     } catch (e) {
-        console.log(e)
         res.status(400).send(e)
     }
 

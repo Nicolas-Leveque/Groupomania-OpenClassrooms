@@ -57,6 +57,11 @@
     height: auto;
 }
 
+.post-control {
+    display: flex;
+    justify-content: space-evenly;
+}
+
 @media all and (max-width: 800px) {
     .post-pic {
         width: 80vw;

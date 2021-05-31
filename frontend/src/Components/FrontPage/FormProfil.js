@@ -29,7 +29,7 @@ const FormProfil = (props) => {
             }).then(localStorage.clear())
         }
         deleteProfil()
-        setReload (true )
+        setReload(true )
     }
     const handleModifyProfil = (e) => {
         e.preventDefault()

@@ -28,8 +28,11 @@ const FrontPage = () => {
     return (
         <div className="frontpage" >
                 <ShareForm />
+                {/* {console.log(data)} */}
                 {data.map((data) => (
-                    <Post 
+                    <Post
+                        userId={data.userId}
+                        admin={data.admin}
                         firstName={data.firstName}
                         lastName={data.lastName}
                         titre={data.titre}

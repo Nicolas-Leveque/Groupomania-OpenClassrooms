@@ -47,7 +47,7 @@ exports.getOneComment = async (req, res) => {
 exports.getPostComments = async (req, res) => {
     try {
         const id = req.params.id
-        const comments = await Comment.sequelize.query(`SELECT comments.id, contenu, comments.createdAt, comments.postId, firstName, lastName, imagetype, imageData FROM comments JOIN users on comments.userId = users.id WHERE postId = ${id} ORDER by comments.createdAt ASC`, {type: QueryTypes.SELECT})
+        const comments = await Comment.sequelize.query(`SELECT comments.userId, comments.id, contenu, comments.createdAt, comments.postId, firstName, lastName, imagetype, imageData FROM comments JOIN users on comments.userId = users.id WHERE postId = ${id} ORDER by comments.createdAt ASC`, {type: QueryTypes.SELECT})
         .then(comment => {
             comment.map(comment => {
                 const userImage = comment.imageData.toString('base64')
