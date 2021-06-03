@@ -6,7 +6,7 @@ class RegisterBox extends React.Component {
     static contextType = AuthContext
     constructor(props) {
         super(props)
-        this.state = { email:'', firstName:'', lastName:'', password:''}
+        this.state = { email:'', firstName:'', lastName:'', password:'', passwordCheck:''}
         this.submitRegister = this.submitRegister.bind(this)
     }
 
@@ -79,6 +79,16 @@ class RegisterBox extends React.Component {
                             className="login-input"
                             placeholder="Password"
                             onChange={(e) => this.setState({ password: e.target.value })}
+                            />
+                    </div>
+                    <div className="input-group">
+                        <label htmlFor="password-check">Verifier Mot de passe</label>
+                        <input 
+                            type="password"
+                            name="password-check"
+                            className="login-input"
+                            placeholder="Password"
+                            onChange={(e) => this.setState({ passwordCheck: e.target.value })}
                             />
                     </div>
                     <button

@@ -1,5 +1,7 @@
 const bcrypt = require('bcrypt')
-const jwt = require('jsonwebtoken')
+
+
+
 
 module.exports = (sequelize, Sequelize) => {
     const User = sequelize.define("user", {
@@ -28,10 +30,12 @@ module.exports = (sequelize, Sequelize) => {
             allowNull: false
         },
         imageType: {
-            type: Sequelize.STRING
+            type: Sequelize.STRING,
+            defaultValue: 'image/jpeg'
         },
         imageName: {
-            type: Sequelize.STRING
+            type: Sequelize.STRING,
+            defaultValue: 'avatar.jpg' 
         },
         imageData: {
             type: Sequelize.BLOB('long'),
@@ -47,9 +51,9 @@ module.exports = (sequelize, Sequelize) => {
         }
     })
     User.beforeSave(async (user, options) => {
-        const hashedPassword = await bcrypt.hash(user.password, 10)
-        user.password = hashedPassword
-    })
-
+    console.log('hook beforesave')
+    const hashedPassword = await bcrypt.hash(user.password, 10)
+    user.password = hashedPassword
+})
     return User
 }

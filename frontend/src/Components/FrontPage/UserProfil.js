@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
+import { AuthContext } from '../../Contexts/AuthContext'
 import './UserProfil.css'
 import FormProfil from './FormProfil'
 import FormAvatar from './FormAvatar'
@@ -6,13 +7,13 @@ import FormAvatar from './FormAvatar'
 const UserProfil = () => {
     const [ data, setData ] = useState([])
     const [ showFormPicture, setShowFormPicture ] = useState(false)
+    const { reload } = useContext( AuthContext )
     useEffect( () => {
         const myHeaders = new Headers({
             'Content-Type': 'application/json',
             'Authorization': 'Bearer ' + localStorage.getItem('token')
         })
-        function fetchData() {
-            fetch('http://localhost:3000/user/me', {
+        fetch('http://localhost:3000/user/me', {
                     method:'get',
                     headers: myHeaders,
                 }).then(response => response.json())
@@ -21,10 +22,7 @@ const UserProfil = () => {
                     json.createdAt = tempDate.toDateString()
                     setData( json )
                 })
-        }
-        fetchData()
-        // eslint-disable-next-line
-    }, [])
+    }, [reload])
     const handleShowFormPicture = (e) => {
         e.preventDefault()
         setShowFormPicture(!showFormPicture)

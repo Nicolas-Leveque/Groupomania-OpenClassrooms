@@ -70,6 +70,10 @@ button {
     justify-content: space-evenly;
 }
 
+.delete-button {
+    background-color: red;
+}
+
 @media all and (max-width: 800px) {
     .user-profil {
         width: 100%;

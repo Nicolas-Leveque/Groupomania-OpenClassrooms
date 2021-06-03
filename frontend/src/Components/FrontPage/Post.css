@@ -59,7 +59,7 @@
 
 .post-control {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: flex-end;
 }
 
 @media all and (max-width: 800px) {

@@ -18,7 +18,7 @@ const App = () => {
                     <PostContextProvider>
                         <Header />
                             <Switch>
-                                <Route exact path="/" component={Content} />
+                                <Route path="/home" component={Content} />
                                 <Route path="/profil" component={UserProfil} />
                                 <Route path="/post/:postId" component={DetailPost} />
                             </Switch>

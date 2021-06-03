@@ -58,7 +58,6 @@ exports.getPostComments = async (req, res) => {
         if (!comments) {
             res.status(404).send()
         }
-        console.log('reponse', comments)
         res.status(200).send(comments)
     } catch(e) {
         console.log(e)

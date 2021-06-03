@@ -8,15 +8,18 @@ const Op = db.Sequelize.Op
 
 const router = new express.Router()
 
+const avatarData = fs.readFileSync(__dirname + '/avatar.jpg')
+
 exports.signup = async (req, res) => {
     try {
         const userInformation = { ...req.body}
+        userInformation.imageData = avatarData
         if ( userInformation.email === 'admin@groupomania.fr' ) {
             userInformation.admin = true
         } else {
             userInformation.admin = false
         }
-
+        console.log(userInformation)
         const user = await User.create(userInformation)
         const token = jwt.sign({ id: user.dataValues.id.toString() }, process.env.JWT_TOKEN, { expiresIn: 604800 })
         res.status(201).send({ user, token })
@@ -52,13 +55,17 @@ exports.login = async ( req, res) => {
 exports.getUser = async (req, res) => {
     try {
         const user = await User.findByPk(req.user.id)
-        const userImage = await user.imageData.toString('base64')
-        user.imageData = userImage
+            .then(user => {
+                const userImage = user.imageData.toString('base64')
+                user['imageData'] = userImage
+                return user
+            })
         if(!user) {
             res.status(404).send()
         }
         res.status(200).send(user)
     }catch(e) {
+        console.log(e)
         res.status(400).send(e)
     }
 }
@@ -75,9 +82,11 @@ exports.deleteUser = async ( req, res) => {
 
 exports.modifyUser = async (req, res) => {
     try {
+        console.log('avant', req.body)
         const user = await User.update( req.body, {
-            where: { id: req.params.id },
+            where: { id: req.user.id },
         })
+        console.log('après', req.body)
         if (!user) {
             res.status(404).send()
         }

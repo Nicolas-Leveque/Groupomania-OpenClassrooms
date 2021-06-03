@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import React, { useContext } from 'react'
 import { AuthContext } from '../../Contexts/AuthContext'
 import './Post.css'
@@ -6,6 +6,7 @@ import './Post.css'
 
 const Post = (props) => {
     const { setReload, userId, isAdmin } = useContext( AuthContext )
+    let history = useHistory()
     const myHeaders = new Headers({
         'Content-Type': 'application/json',
         'Authorization': 'Bearer ' + localStorage.getItem('token')
@@ -16,6 +17,7 @@ const Post = (props) => {
             method: 'delete',
             headers: myHeaders
         }).then(res => console.log(res))
+        history.push('/home')
         setReload( true )
     }
     return (

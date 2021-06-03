@@ -1,18 +1,20 @@
 import { useContext } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useHistory  } from 'react-router-dom'
 import { AuthContext } from '../../Contexts/AuthContext'
 import './Header.css'
 import logo from '../../logos/icon-left-font-monochrome-white.svg'
 const Header = () => {
+    let history = useHistory()
     const { setReload } = useContext( AuthContext )
     const handleLogout = () => {
+        history.push('/home')
         localStorage.clear()
         setReload( true )
     }
     return (
         <header>
             
-            <Link to='/' exact={true}>
+            <Link to='/home' >
                 <img className="logo" src={logo} alt='groupomania logo' />
             </Link>
             <div className="header-right">
