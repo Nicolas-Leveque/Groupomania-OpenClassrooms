@@ -1,25 +1,24 @@
-import React, { useState } from 'react'
-
+import React, { useState, useContext } from 'react'
+import { AuthContext } from '../../Contexts/AuthContext'
 const FormAvatar = () => {
     const [ newProfilPic, setNewProfilPic ] = useState()
+    const { setReload, reload } = useContext( AuthContext )
     const handleSetProfilPicture = (e) => {
         e.preventDefault();
         
         const myHeaders = new Headers({
             'Authorization': 'Bearer ' + localStorage.getItem('token')
         })
-        
-        function setProfilPicture() {
-            const data = new FormData() 
-            data.append('imageData', newProfilPic)
-            fetch(`http://localhost:3000/user/avatar`, {
-                method: 'post',
-                headers: myHeaders,
-                body: data
-            }).then(res => console.log(res))
-        }
-        setProfilPicture()
-        console.log('state', newProfilPic)
+        const data = new FormData() 
+        data.append('imageData', newProfilPic)
+        fetch(`http://localhost:3000/user/avatar`, {
+            method: 'post',
+            headers: myHeaders,
+            body: data
+        }).then(res => console.log(res))
+        setReload(true)
+
+        console.log('formAvatar', reload)
         
     }
     return (  

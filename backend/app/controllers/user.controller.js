@@ -19,7 +19,8 @@ exports.signup = async (req, res) => {
         } else {
             userInformation.admin = false
         }
-        console.log(userInformation)
+        const hashedPassword = await bcrypt.hash(userInformation.password, 10)
+        userInformation.password = hashedPassword
         const user = await User.create(userInformation)
         const token = jwt.sign({ id: user.dataValues.id.toString() }, process.env.JWT_TOKEN, { expiresIn: 604800 })
         res.status(201).send({ user, token })
@@ -47,7 +48,6 @@ exports.login = async ( req, res) => {
         res.status(200).send({ user, token })
 
     } catch(e) {
-        console.log(e)
         res.status(400).send(e)
     }
 }
@@ -82,7 +82,10 @@ exports.deleteUser = async ( req, res) => {
 
 exports.modifyUser = async (req, res) => {
     try {
-        console.log('avant', req.body)
+        if (req.body.password){
+            const hashedPassword = await bcrypt.hash(req.body.password, 10)
+            req.body.password = hashedPassword
+        } 
         const user = await User.update( req.body, {
             where: { id: req.user.id },
         })

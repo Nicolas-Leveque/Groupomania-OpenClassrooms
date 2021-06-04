@@ -7,9 +7,9 @@ const Header = () => {
     let history = useHistory()
     const { setReload } = useContext( AuthContext )
     const handleLogout = () => {
-        history.push('/home')
         localStorage.clear()
         setReload( true )
+        history.push('/home')
     }
     return (
         <header>

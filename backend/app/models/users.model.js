@@ -50,10 +50,5 @@ module.exports = (sequelize, Sequelize) => {
             }
         }
     })
-    User.beforeSave(async (user, options) => {
-    console.log('hook beforesave')
-    const hashedPassword = await bcrypt.hash(user.password, 10)
-    user.password = hashedPassword
-})
     return User
 }

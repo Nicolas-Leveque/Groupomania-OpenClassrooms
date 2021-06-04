@@ -16,23 +16,32 @@ class LoginBox extends React.Component {
         const myHeaders = new Headers({
             'Content-Type': 'application/json'
         })
-        try {
-            fetch('http://localhost:3000/login', {
+        
+        fetch('http://localhost:3000/login', {
             method:'post',
             headers: myHeaders,
             body: JSON.stringify(loginRequest)
         })
-            .then((response) => response.json())
+            .then((response) => {
+                try {
+                    if(response.status !== 200) {
+                        throw new Error('Erreur de connexion')
+                    }
+                    return response.json()
+                }catch(e){
+                    console.log(e)
+                    return
+                }
+            }
+            )
             .then(json => {
                 localStorage.setItem('token', json.token)
                 localStorage.setItem('id', json.user.id)
                 this.context.setToken( json.token )
                 this.context.setUserId( json.user.id )
                 this.context.setIsAdmin( json.user.admin )
-            })}
-        catch (e) {
-            return
-        }
+                console.log(json)
+            })
     }
     render() {
         return (

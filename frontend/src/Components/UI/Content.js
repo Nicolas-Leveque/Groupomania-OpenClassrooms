@@ -8,6 +8,7 @@ const Content = () => {
     const { reload, setReload } = useContext(AuthContext)
     useEffect( () => {
         if ( reload ) {
+            console.log('reload')
             setReload( false ) 
         }
     }, [ reload, setReload ])

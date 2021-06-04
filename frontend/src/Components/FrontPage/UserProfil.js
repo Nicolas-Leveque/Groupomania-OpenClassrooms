@@ -7,8 +7,11 @@ import FormAvatar from './FormAvatar'
 const UserProfil = () => {
     const [ data, setData ] = useState([])
     const [ showFormPicture, setShowFormPicture ] = useState(false)
-    const { reload } = useContext( AuthContext )
+    const { reload, setReload } = useContext( AuthContext )
     useEffect( () => {
+        if ( reload ) {
+            setReload( false ) 
+        }
         const myHeaders = new Headers({
             'Content-Type': 'application/json',
             'Authorization': 'Bearer ' + localStorage.getItem('token')
@@ -22,7 +25,7 @@ const UserProfil = () => {
                     json.createdAt = tempDate.toDateString()
                     setData( json )
                 })
-    }, [reload])
+    }, [reload, setReload])
     const handleShowFormPicture = (e) => {
         e.preventDefault()
         setShowFormPicture(!showFormPicture)
@@ -39,7 +42,7 @@ const UserProfil = () => {
                     <button onClick={handleShowFormPicture}>Choisir une photo</button>
                     {showFormPicture && <FormAvatar /> }
                 </div>
-                <FormProfil data={data}/>
+                <FormProfil data={data} />
             </div>
         </div>
     );

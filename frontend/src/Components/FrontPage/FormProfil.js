@@ -10,7 +10,7 @@ const FormProfil = (props) => {
     const [ email , setEmail ] = useState(props.data.email)
     const [ password, setPassword] = useState(props.data.password)
     const [ passwordCheck, setPasswordCheck ] = useState()
-    const { setReload } = useContext( AuthContext )
+    const { setReload, reload } = useContext( AuthContext )
     let history = useHistory()
 
     const id = localStorage.getItem('id')
@@ -41,6 +41,7 @@ const FormProfil = (props) => {
                 body: JSON.stringify(newProfil)
             }).then(res => console.log(res))
         setReload(true)
+        console.log('from-profil',reload)
     }
     const handleModifyPassword = (e) => {
         e.preventDefault()
@@ -56,6 +57,8 @@ const FormProfil = (props) => {
             console.log( "Password modifié")
             setReload(true)
         } else {console.log('erreur')}
+        setReload(true)
+        console.log(reload)
         
     }
     return (
