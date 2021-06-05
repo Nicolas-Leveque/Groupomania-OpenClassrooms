@@ -23,17 +23,11 @@ class LoginBox extends React.Component {
             body: JSON.stringify(loginRequest)
         })
             .then((response) => {
-                try {
-                    if(response.status !== 200) {
+                    if(!response.ok) {
                         throw new Error('Erreur de connexion')
                     }
                     return response.json()
-                }catch(e){
-                    console.log(e)
-                    return
-                }
-            }
-            )
+            })
             .then(json => {
                 localStorage.setItem('token', json.token)
                 localStorage.setItem('id', json.user.id)
@@ -41,7 +35,7 @@ class LoginBox extends React.Component {
                 this.context.setUserId( json.user.id )
                 this.context.setIsAdmin( json.user.admin )
                 console.log(json)
-            })
+            }).catch(e => console.log(e))
     }
     render() {
         return (
@@ -69,7 +63,7 @@ class LoginBox extends React.Component {
                     <button
                         type="submit"
                         value="Submit"
-                        className="login-btn"                        >Login</button>
+                        className="login-btn">Login</button>
                 </form>
             </div>
         )
