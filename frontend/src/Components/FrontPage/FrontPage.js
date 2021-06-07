@@ -12,23 +12,19 @@ const FrontPage = () => {
             'Content-Type': 'application/json',
             'Authorization': 'Bearer ' + localStorage.getItem('token')
         })
-        function fetchData() {
-            fetch('http://localhost:3000/post', {
+        fetch('http://localhost:3000/post', {
                     method:'get',
                     headers: myHeaders,
                 }).then(response => response.json())
                 .then(json => {
                     setData( json )
                 })
-        }
-        fetchData()
         setReload( false )
         // eslint-disable-next-line
     }, [ reload ])
     return (
         <div className="frontpage" >
                 <ShareForm />
-                {/* {console.log(data)} */}
                 {data.map((data) => (
                     <Post
                         userId={data.userId}

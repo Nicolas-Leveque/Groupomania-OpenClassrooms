@@ -6,7 +6,7 @@ class LoginBox extends React.Component {
     static contextType = AuthContext
     constructor(props) {
         super(props)
-        this.state = {email: '', password: ''}
+        this.state = {email: '', password: '', isLoginOk: true}
         this.submitLogin = this.submitLogin.bind(this)
     }
     
@@ -16,7 +16,6 @@ class LoginBox extends React.Component {
         const myHeaders = new Headers({
             'Content-Type': 'application/json'
         })
-        
         fetch('http://localhost:3000/login', {
             method:'post',
             headers: myHeaders,
@@ -35,7 +34,10 @@ class LoginBox extends React.Component {
                 this.context.setUserId( json.user.id )
                 this.context.setIsAdmin( json.user.admin )
                 console.log(json)
-            }).catch(e => console.log(e))
+            }).catch(e => {
+                console.log(e)
+                this.setState({isLoginOk: false})
+            })
     }
     render() {
         return (
@@ -60,6 +62,7 @@ class LoginBox extends React.Component {
                             className="login-input"
                             placeholder="Password"/>
                     </div>
+                    {!this.state.isLoginOk && <p>Erreur de connexion, veuiller vérifier vos identifiants </p>}
                     <button
                         type="submit"
                         value="Submit"

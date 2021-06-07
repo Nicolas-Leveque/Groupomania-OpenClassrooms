@@ -15,7 +15,6 @@ const Comment = (props) => {
             headers: myHeaders
         }).then(res => console.log(res))
         setReload( true )
-
     }
     return (  
         <div className="comment">

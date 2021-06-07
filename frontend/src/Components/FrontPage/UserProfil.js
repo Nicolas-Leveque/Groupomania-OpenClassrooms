@@ -9,9 +9,6 @@ const UserProfil = () => {
     const [ showFormPicture, setShowFormPicture ] = useState(false)
     const { reload, setReload } = useContext( AuthContext )
     useEffect( () => {
-        if ( reload ) {
-            setReload( false ) 
-        }
         const myHeaders = new Headers({
             'Content-Type': 'application/json',
             'Authorization': 'Bearer ' + localStorage.getItem('token')
@@ -25,7 +22,9 @@ const UserProfil = () => {
                     json.createdAt = tempDate.toDateString()
                     setData( json )
                 })
+                setReload(false)
     }, [reload, setReload])
+
     const handleShowFormPicture = (e) => {
         e.preventDefault()
         setShowFormPicture(!showFormPicture)
@@ -35,7 +34,6 @@ const UserProfil = () => {
         <div className='user-profil'>
             <h2>{data.fullName}</h2>
             <p>Inscrit depuis {data.createdAt}</p>
-            
             <div className='user-container'>
                 <div className='profil-photo'>
                     <img src={`data:${data.imageType};base64,${data.imageData}`} alt="profil" />
