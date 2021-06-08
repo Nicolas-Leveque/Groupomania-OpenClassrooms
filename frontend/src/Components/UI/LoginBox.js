@@ -1,18 +1,18 @@
-import React from 'react'
+import React, { useState, useContext } from 'react'
+import { useHistory } from 'react-router-dom'
 import { AuthContext } from '../../Contexts/AuthContext'
 import './LoginRegister.css'
 
-class LoginBox extends React.Component {
-    static contextType = AuthContext
-    constructor(props) {
-        super(props)
-        this.state = {email: '', password: '', isLoginOk: true}
-        this.submitLogin = this.submitLogin.bind(this)
-    }
-    
-    submitLogin(e) {
+const LoginBox = () => {
+    const [ email, setEmail ] = useState()
+    const [ password, setPassword ] = useState()
+    const [ isLoginOk, setIsLoginOk ] = useState(true)
+    const { setToken, setUserId, setIsAdmin } = useContext( AuthContext )
+    let history = useHistory()
+
+    const submitLogin = (e) => {
         e.preventDefault()
-        const loginRequest = {email: this.state.email, password: this.state.password}
+        const loginRequest = {email: email, password: password}
         const myHeaders = new Headers({
             'Content-Type': 'application/json'
         })
@@ -30,25 +30,24 @@ class LoginBox extends React.Component {
             .then(json => {
                 localStorage.setItem('token', json.token)
                 localStorage.setItem('id', json.user.id)
-                this.context.setToken( json.token )
-                this.context.setUserId( json.user.id )
-                this.context.setIsAdmin( json.user.admin )
+                setToken( json.token )
+                setUserId( json.user.id )
+                setIsAdmin( json.user.admin )
+                history.push('/home')
                 console.log(json)
             }).catch(e => {
-                console.log(e)
-                this.setState({isLoginOk: false})
+                setIsLoginOk(false)
             })
     }
-    render() {
-        return (
-            <div className="inner-container">
+    return (
+        <div className="inner-container">
                 <div className="header">Login</div>
-                <form className="box" onSubmit={this.submitLogin}>
+                <form className="box" onSubmit={submitLogin}>
                     <div className="input-group">
                         <label htmlFor="email">Email</label>
                         <input 
                             type="email"
-                            onChange={(e) => this.setState({ email: e.target.value })}
+                            onChange={(e) => setEmail(e.target.value)}
                             name="email"
                             className="login-input"
                             placeholder="Email"/>
@@ -57,20 +56,19 @@ class LoginBox extends React.Component {
                         <label htmlFor="password">Password</label>
                         <input 
                             type="password"
-                            onChange={(e) => this.setState({ password: e.target.value })}
+                            onChange={(e) => setPassword(e.target.value)}
                             name="password"
                             className="login-input"
                             placeholder="Password"/>
                     </div>
-                    {!this.state.isLoginOk && <p>Erreur de connexion, veuiller vérifier vos identifiants </p>}
+                    {!isLoginOk && <p>Erreur de connexion, veuiller vérifier vos identifiants </p>}
                     <button
                         type="submit"
                         value="Submit"
                         className="login-btn">Login</button>
                 </form>
             </div>
-        )
-    }
+    );
 }
 
-export default LoginBox
+export default LoginBox;
