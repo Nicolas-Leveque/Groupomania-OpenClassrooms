@@ -21,7 +21,7 @@ const FrontPage = () => {
                 })
         setReload( false )
         // eslint-disable-next-line
-    }, [ reload ])
+    }, [ reload, setReload ])
     return (
         <div className="frontpage" >
                 <ShareForm />

@@ -24,7 +24,7 @@ const NewPic = (props) => {
                 headers: myHeaders,
                 body:  data
             }).then(res => console.log(res))
-            .then(setReload(true))
+            .then(setReload( true ))
             .then(props.onCancel())
             console.log(reload)
 

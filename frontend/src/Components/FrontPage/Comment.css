@@ -14,11 +14,11 @@
     height: 3rem;
     border-radius: 50%;
     margin: 2%;
-
-
 }
 
 .comment-control {
+    width: 100%;
     display: flex;
+    flex-direction: row;
     justify-content: flex-end;
 }

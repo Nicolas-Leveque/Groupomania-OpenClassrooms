@@ -17,7 +17,6 @@ exports.createPost = async (req, res) => {
 
 exports.createPicturePost = async (req, res) => {
     try {
-        console.log(req.file)
         await Post.create({
             titre: req.body.titre,
             userId: req.body.userId,
@@ -87,7 +86,7 @@ exports.getUserPosts = async (req, res) => {
 
 exports.getAllposts = async (req, res) => {
     try {
-        const posts = await Post.sequelize.query('SELECT posts.userId, posts.id, posts.titre, posts.contenu, DATE_FORMAT(posts.createdAt, "le %e/%m/%Y à %H:%i") AS creation, posts.imageType AS postImgType, posts.imageData AS postImgData, users.firstName, users.lastName, users.admin, users.imageType, users.imageData, COUNT(postID) AS nbr_comments FROM posts JOIN users ON posts.userId = users.id LEFT JOIN comments ON posts.id = comments.postId GROUP BY posts.id ORDER BY creation DESC', {type: QueryTypes.SELECT})
+        const posts = await Post.sequelize.query('SELECT posts.userId, posts.id, posts.titre, posts.contenu, DATE_FORMAT(posts.createdAt, "le %e/%m/%Y à %H:%i") AS creation, posts.imageType AS postImgType, posts.imageData AS postImgData, users.firstName, users.lastName, users.admin, users.imageType, users.imageData, COUNT(postID) AS nbr_comments FROM posts JOIN users ON posts.userId = users.id LEFT JOIN comments ON posts.id = comments.postId GROUP BY posts.id ORDER BY posts.createdAt DESC', {type: QueryTypes.SELECT})
         .then(posts => {
             
             posts.map(post => {

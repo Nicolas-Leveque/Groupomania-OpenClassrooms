@@ -1,0 +1,7 @@
+.comment-input input {
+    width: 80%;
+    border-radius: 15px;
+    margin-bottom: 3%;
+    padding: 1%;
+    line-height: 1.5rem;
+}

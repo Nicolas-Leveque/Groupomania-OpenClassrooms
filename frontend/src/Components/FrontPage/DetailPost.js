@@ -33,7 +33,7 @@ const DetailPost = () => {
                 })
         setReload( false )
         // eslint-disable-next-line
-    }, [ reload ])
+    }, [ reload, setReload ])
     const handleCommentForm = () => {
         setShowCommentForm(true)
     }
