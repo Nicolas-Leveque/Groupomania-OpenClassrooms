@@ -32,6 +32,7 @@ exports.createPicturePost = async (req, res) => {
 
 exports.modifyPost = async (req, res) => {
     try {
+        console.log('request', req.body)
         const post = await Post.update( req.body, {
             where: { id: req.params.id},
         })
@@ -40,6 +41,7 @@ exports.modifyPost = async (req, res) => {
         }
         res.status(200).json({ message: "Post modifié"})
     } catch (e) {
+        console.log(e)
         res.status(500).send(e)
     }
 }

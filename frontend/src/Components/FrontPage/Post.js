@@ -1,10 +1,12 @@
+import React, { useContext, useState  } from 'react'
 import { Link, useHistory } from 'react-router-dom'
-import React, { useContext } from 'react'
 import { AuthContext } from '../../Contexts/AuthContext'
+import PostModForm from './PostModForm'
 import './Post.css'
 
 
 const Post = (props) => {
+    const [ showModifyPost, setShowModifyPost ] = useState(false)
     const { setReload, userId, isAdmin } = useContext( AuthContext )
     let history = useHistory()
     const myHeaders = new Headers({
@@ -20,6 +22,11 @@ const Post = (props) => {
         history.push('/home')
         setReload( true )
     }
+    const changeModifyPost = (e) => {
+        e.preventDefault()
+        setShowModifyPost(!showModifyPost)
+    }
+
     return (
         <div className="post-container">
             <div className="utilisateur-info">
@@ -37,11 +44,16 @@ const Post = (props) => {
                     {props.postPicture && <img className="post-pic" src={`data:${props.typeImgPost};base64,${props.postPicture}`} alt={`post n°${props.id}`}/>}
                     <p className="corps-post">{props.contenu}</p>
                 </Link>
-                    <p className="nbre-comments">{props.nbrComment} Commentaires</p>
+                <p className="nbre-comments">{props.nbrComment} Commentaires</p>
             </div>
-            <div className="post-control">
-                {(userId === props.userId || isAdmin) && <button onClick={handleDeletePost}>Supprimer</button>}
-            </div>
+            {showModifyPost && <PostModForm id={props.id} titre={props.titre} contenu={props.contenu} switch={changeModifyPost} /> }
+            {(userId === props.userId || isAdmin) && (
+                <div className="post-control">
+                    <button onClick={changeModifyPost}>Modifier</button>
+                    <button onClick={handleDeletePost}>Supprimer</button>
+                </div>
+                )}
+            
             
         </div>
     )

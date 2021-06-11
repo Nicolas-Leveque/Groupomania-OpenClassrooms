@@ -1,0 +1,23 @@
+.post-input {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+}
+
+.post-input label {
+    margin: 2%;
+}
+
+
+.post-input input, textarea {
+    width: 100%;
+}
+
+.post-control {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+
+}
