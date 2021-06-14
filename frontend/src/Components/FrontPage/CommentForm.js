@@ -16,7 +16,7 @@ const CommentForm = (props) => {
             'Content-Type': 'application/json',
             'Authorization': 'Bearer ' + localStorage.getItem('token')
         })
-        fetch('http://localhost:3000/comment', {
+        fetch('http://localhost:3001/comment', {
             method:'post',
             headers: myHeaders,
             body: JSON.stringify(newComment)

@@ -17,14 +17,14 @@ const DetailPost = () => {
             'Content-Type': 'application/json',
             'Authorization': 'Bearer ' + localStorage.getItem('token')
         })
-        fetch(`http://localhost:3000/post/${postId}`, {
+        fetch(`http://localhost:3001/post/${postId}`, {
                     method:'get',
                     headers: myHeaders,
             }).then(response => response.json())
                 .then(json => {
                     setPostData( json[0] )
                 })
-        fetch(`http://localhost:3000/comment/post/${postId}`, {
+        fetch(`http://localhost:3001/comment/post/${postId}`, {
                 method: 'get',
                 headers: myHeaders,
             }).then(response => response.json())

@@ -11,7 +11,7 @@ const FormAvatar = () => {
         })
         const data = new FormData() 
         data.append('imageData', newProfilPic)
-        fetch(`http://localhost:3000/user/avatar`, {
+        fetch(`http://localhost:3001/user/avatar`, {
             method: 'post',
             headers: myHeaders,
             body: data

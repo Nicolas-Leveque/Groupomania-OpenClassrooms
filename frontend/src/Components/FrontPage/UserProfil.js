@@ -13,7 +13,7 @@ const UserProfil = () => {
             'Content-Type': 'application/json',
             'Authorization': 'Bearer ' + localStorage.getItem('token')
         })
-        fetch('http://localhost:3000/user/me', {
+        fetch('http://localhost:3001/user/me', {
                     method:'get',
                     headers: myHeaders,
                 }).then(response => response.json())

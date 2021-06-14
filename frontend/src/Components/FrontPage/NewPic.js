@@ -19,7 +19,7 @@ const NewPic = (props) => {
             data.append('imageData', newPic)
             data.append('titre', title)
             console.log(data)
-            fetch(`http://localhost:3000/post/pic`, {
+            fetch(`http://localhost:3001/post/pic`, {
                 method: 'post',
                 headers: myHeaders,
                 body:  data

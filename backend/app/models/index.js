@@ -5,6 +5,11 @@ const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
     host: dbConfig.HOST,
     dialect: 'mysql',
     operatorAliases: false,
+    dialectOptions: { 
+        ssl: {
+            require: false
+        }
+    }
 })
 
 const db = {}

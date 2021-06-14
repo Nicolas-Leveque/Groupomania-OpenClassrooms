@@ -5,7 +5,8 @@ import './Comment.css'
 
 const Comment = (props) => {
     const [ showModifyComment, setShowModifyForm] = useState(false)
-    const { setReload, userId, isAdmin } = useContext( AuthContext )
+    const { setReload, userId } = useContext( AuthContext )
+    const isAdmin = localStorage.getItem('admin')
     const myHeaders = new Headers({
         'Content-Type': 'application/json',
         'Authorization': 'Bearer ' + localStorage.getItem('token')
@@ -13,7 +14,7 @@ const Comment = (props) => {
     const handleDeleteComment = (e) => {
         
         e.preventDefault()
-        fetch(`http://localhost:3000/comment/${props.id}`, {
+        fetch(`http://localhost:3001/comment/${props.id}`, {
             method: 'delete',
             headers: myHeaders
         })

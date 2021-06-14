@@ -12,7 +12,7 @@ const FrontPage = () => {
             'Content-Type': 'application/json',
             'Authorization': 'Bearer ' + localStorage.getItem('token')
         })
-        fetch('http://localhost:3000/post', {
+        fetch('http://localhost:3001/post', {
                     method:'get',
                     headers: myHeaders,
                 }).then(response => response.json())

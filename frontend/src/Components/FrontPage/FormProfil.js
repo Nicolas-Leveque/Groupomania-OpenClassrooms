@@ -18,7 +18,7 @@ const FormProfil = (props) => {
     })
     const handleDeleteProfil = (e) => {
         e.preventDefault()
-        fetch(`http://localhost:3000/${id}`, {
+        fetch(`http://localhost:3001/${id}`, {
                 method:'delete',
                 headers: myHeaders,
             })
@@ -33,7 +33,7 @@ const FormProfil = (props) => {
             lastName: lastName,
             email: email
         }
-        fetch(`http://localhost:3000/user/${id}`, {
+        fetch(`http://localhost:3001/user/${id}`, {
                 method: 'put',
                 headers: myHeaders,
                 body: JSON.stringify(newProfil)
@@ -47,7 +47,7 @@ const FormProfil = (props) => {
             const newProfil = {
                 password: password
             }
-            fetch(`http://localhost:3000/user/${id}`, {
+            fetch(`http://localhost:3001/user/${id}`, {
                     method: 'put',
                     headers: myHeaders,
                     body: JSON.stringify(newProfil)

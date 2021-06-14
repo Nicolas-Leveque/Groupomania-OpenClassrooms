@@ -7,7 +7,8 @@ import './Post.css'
 
 const Post = (props) => {
     const [ showModifyPost, setShowModifyPost ] = useState(false)
-    const { setReload, userId, isAdmin } = useContext( AuthContext )
+    const { setReload, userId } = useContext( AuthContext )
+    const isAdmin = localStorage.getItem('admin')
     let history = useHistory()
     const myHeaders = new Headers({
         'Content-Type': 'application/json',
@@ -15,7 +16,7 @@ const Post = (props) => {
     })
     const handleDeletePost = (e) => {
         e.preventDefault()
-        fetch(`http://localhost:3000/post/${props.id}`, {
+        fetch(`http://localhost:3001/post/${props.id}`, {
             method: 'delete',
             headers: myHeaders
         }).then(res => console.log(res))

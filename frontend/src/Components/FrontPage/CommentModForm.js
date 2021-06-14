@@ -12,7 +12,7 @@ const CommentModForm = (props) => {
     const handleModifyComment = (e) => {
         e.preventDefault()
         
-        fetch(`http://localhost:3000/comment/${props.id}`, {
+        fetch(`http://localhost:3001/comment/${props.id}`, {
             method: 'put',
             headers: myHeaders,
             body: JSON.stringify({ contenu: commentData })

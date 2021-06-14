@@ -19,7 +19,7 @@ const NewShare = (props) => {
             'Content-Type': 'application/json',
             'Authorization': 'Bearer ' + localStorage.getItem('token')
         })
-        fetch('http://localhost:3000/post', {
+        fetch('http://localhost:3001/post', {
             method:'post',
             headers: myHeaders,
             body: JSON.stringify(newShare)

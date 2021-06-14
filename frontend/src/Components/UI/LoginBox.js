@@ -16,7 +16,7 @@ const LoginBox = () => {
         const myHeaders = new Headers({
             'Content-Type': 'application/json'
         })
-        fetch('http://localhost:3000/login', {
+        fetch('http://localhost:3001/login', {
             method:'post',
             headers: myHeaders,
             body: JSON.stringify(loginRequest)
@@ -30,6 +30,7 @@ const LoginBox = () => {
             .then(json => {
                 localStorage.setItem('token', json.token)
                 localStorage.setItem('id', json.user.id)
+                localStorage.setItem('admin', json.user.admin)
                 setToken( json.token )
                 setUserId( json.user.id )
                 setIsAdmin( json.user.admin )
