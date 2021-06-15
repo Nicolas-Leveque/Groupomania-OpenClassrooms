@@ -5,8 +5,7 @@ import './Comment.css'
 
 const Comment = (props) => {
     const [ showModifyComment, setShowModifyForm] = useState(false)
-    const { setReload, userId } = useContext( AuthContext )
-    const isAdmin = localStorage.getItem('admin')
+    const { setReload, userId, isAdmin } = useContext( AuthContext )
     const myHeaders = new Headers({
         'Content-Type': 'application/json',
         'Authorization': 'Bearer ' + localStorage.getItem('token')
@@ -35,7 +34,7 @@ const Comment = (props) => {
             </div>
             <p className="comment-contenu">{props.contenu}</p>
             {(showModifyComment) && <CommentModForm contenu={props.contenu} id={props.id} switch={changeModifyComment}/>}
-            {(userId === props.userId || isAdmin) && (
+            {(userId === props.userId || isAdmin === true) && (
                 <div className="comment-control">
                     <button onClick={changeModifyComment}>Modifier</button>
                     <button onClick={handleDeleteComment}>Supprimer</button>

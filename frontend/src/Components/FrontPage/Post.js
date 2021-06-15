@@ -7,8 +7,7 @@ import './Post.css'
 
 const Post = (props) => {
     const [ showModifyPost, setShowModifyPost ] = useState(false)
-    const { setReload, userId } = useContext( AuthContext )
-    const isAdmin = localStorage.getItem('admin')
+    const { setReload, userId, isAdmin } = useContext( AuthContext )
     let history = useHistory()
     const myHeaders = new Headers({
         'Content-Type': 'application/json',
@@ -48,12 +47,15 @@ const Post = (props) => {
                 <p className="nbre-comments">{props.nbrComment} Commentaires</p>
             </div>
             {showModifyPost && <PostModForm id={props.id} titre={props.titre} contenu={props.contenu} switch={changeModifyPost} /> }
-            {(userId === props.userId || isAdmin) && (
-                <div className="post-control">
-                    <button onClick={changeModifyPost}>Modifier</button>
-                    <button onClick={handleDeletePost}>Supprimer</button>
-                </div>
-                )}
+            {console.log("admin", isAdmin)}
+            {((userId === props.userId) || (isAdmin === true)) && 
+                (
+                    <div className="post-control">
+                        <button onClick={changeModifyPost}>Modifier</button>
+                        <button onClick={handleDeletePost}>Supprimer</button>
+                    </div>
+                )
+            }
             
             
         </div>
