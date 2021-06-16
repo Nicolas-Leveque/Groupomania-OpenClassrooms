@@ -19,8 +19,8 @@ const Post = (props) => {
             method: 'delete',
             headers: myHeaders
         }).then(res => console.log(res))
+        setReload(true)
         history.push('/home')
-        setReload( true )
     }
     const changeModifyPost = (e) => {
         e.preventDefault()
@@ -28,7 +28,7 @@ const Post = (props) => {
     }
 
     return (
-        <div className="post-container">
+        <article className="post-container">
             <div className="utilisateur-info">
                 <div className="photo-profil">
                     <img className="profil-pic" src={`data:${props.typeAvatar};base64,${props.avatar}`} alt="profil" />
@@ -47,7 +47,6 @@ const Post = (props) => {
                 <p className="nbre-comments">{props.nbrComment} Commentaires</p>
             </div>
             {showModifyPost && <PostModForm id={props.id} titre={props.titre} contenu={props.contenu} switch={changeModifyPost} /> }
-            {console.log("admin", isAdmin)}
             {((userId === props.userId) || (isAdmin === true)) && 
                 (
                     <div className="post-control">
@@ -58,7 +57,7 @@ const Post = (props) => {
             }
             
             
-        </div>
+        </article>
     )
 }
 export default Post

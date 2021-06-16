@@ -5,16 +5,14 @@ import './ShareForm.css'
 const NewPic = (props) => {
     const [title, setTitle] = useState('')
     const [ newPic, setNewPic ] = useState()
-    const { reload, setReload } = useContext( AuthContext )
+    const { setReload } = useContext( AuthContext )
     const handleNewPicShare = (e) => {
         e.preventDefault()
 
         const myHeaders = new Headers({
             'Authorization': 'Bearer ' + localStorage.getItem('token')
         })
-
-        function setNewPicShare() {
-            const data = new FormData()
+        const data = new FormData()
             data.append('userId', localStorage.getItem('id'))
             data.append('imageData', newPic)
             data.append('titre', title)
@@ -24,12 +22,8 @@ const NewPic = (props) => {
                 headers: myHeaders,
                 body:  data
             }).then(res => console.log(res))
-            .then(setReload( true ))
+            .then(setReload(true))
             .then(props.onCancel())
-            console.log(reload)
-
-        }
-        setNewPicShare()
     }
     return (  
         <form onSubmit={handleNewPicShare} className="pic-share">

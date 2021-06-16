@@ -16,10 +16,8 @@ const FrontPage = () => {
                     method:'get',
                     headers: myHeaders,
                 }).then(response => response.json())
-                .then(json => {
-                    setData( json )
-                })
-        setReload( false )
+                .then(json => setData(json))
+        setReload(false)
         // eslint-disable-next-line
     }, [ reload, setReload ])
     return (

@@ -35,7 +35,6 @@ const LoginBox = () => {
                 setUserId( json.user.id )
                 setIsAdmin( json.user.admin )
                 history.push('/home')
-                console.log(json)
             }).catch(e => {
                 setIsLoginOk(false)
             })

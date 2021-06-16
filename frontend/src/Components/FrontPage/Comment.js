@@ -27,7 +27,7 @@ const Comment = (props) => {
     }
     
     return (  
-        < div className="comment">
+        <article className="comment">
             <div className="comment-profil">
                 <img id="photo-profil" src={`data:${props.typeImage};base64,${props.avatar}`} alt="" />
                 <h5>{props.name}</h5>
@@ -41,7 +41,7 @@ const Comment = (props) => {
                 </div> 
             )}
                 
-        </div>
+        </article>
     );
 }
 

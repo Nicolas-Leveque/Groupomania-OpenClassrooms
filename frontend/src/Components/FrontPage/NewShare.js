@@ -5,14 +5,13 @@ import { AuthContext } from '../../Contexts/AuthContext'
 const NewShare = (props) => {
     const [title, setTitle] = useState('')
     const [content, setContent] = useState('')
-    const { reload, setReload } = useContext( AuthContext )
+    const { setReload } = useContext( AuthContext )
 
     const createPost = (e) => {
         e.preventDefault()
         const newShare = {
             titre: title,
             contenu: content,
-            type_post: "text",
             userId: localStorage.getItem('id')
         }
         const myHeaders = new Headers({
@@ -24,9 +23,8 @@ const NewShare = (props) => {
             headers: myHeaders,
             body: JSON.stringify(newShare)
         }).then(response => console.log(response))
-        .then(setReload( true ))
-        .then(props.onCancel())
-        console.log(reload)
+        setReload(true)
+        props.onCancel()
     }
     return (
         <form onSubmit={createPost}>

@@ -8,21 +8,23 @@ const UserProfil = () => {
     const [ data, setData ] = useState([])
     const [ showFormPicture, setShowFormPicture ] = useState(false)
     const { reload, setReload } = useContext( AuthContext )
+    const myHeaders = new Headers({
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + localStorage.getItem('token')
+    })
+
     useEffect( () => {
-        const myHeaders = new Headers({
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + localStorage.getItem('token')
-        })
         fetch('http://localhost:3001/user/me', {
                     method:'get',
                     headers: myHeaders,
-                }).then(response => response.json())
-                .then(json => {
-                    const tempDate = new Date(json.createdAt)
-                    json.createdAt = tempDate.toDateString()
-                    setData( json )
-                })
-                setReload(false)
+        }).then(response => response.json())
+        .then(json => {
+            const tempDate = new Date(json.createdAt)
+            json.createdAt = tempDate.toDateString()
+            setData( json )
+        })
+        setReload(false)
+        // eslint-disable-next-line
     }, [reload, setReload])
 
     const handleShowFormPicture = (e) => {

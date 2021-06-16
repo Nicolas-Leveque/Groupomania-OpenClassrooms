@@ -19,13 +19,7 @@ Le script 'dev' lancé par la commande
 ```
 npm run dev
 ```
-lance l'api avec la base de données en local, pour cela il faudra avoir un serveur mysql sur le localhost. 
-
-Le script "azure"
-```
-npm run azure
-```
-quand à lui lance l'api avec la base de données hébergée sur Microsoft Azure, rien d'autres n'est nécessaire pour le bon fonctionnement de l'application.
+lance l'api et se connecte à la base de données MySQL hébergée sur Microsoft Azure 
 
 ### Frontend
 
