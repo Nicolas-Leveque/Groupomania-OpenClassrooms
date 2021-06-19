@@ -8,7 +8,6 @@ const NewPic = (props) => {
     const { setReload } = useContext( AuthContext )
     const handleNewPicShare = (e) => {
         e.preventDefault()
-
         const myHeaders = new Headers({
             'Authorization': 'Bearer ' + localStorage.getItem('token')
         })
@@ -21,9 +20,9 @@ const NewPic = (props) => {
                 method: 'post',
                 headers: myHeaders,
                 body:  data
-            }).then(res => console.log(res))
-            .then(setReload(true))
-            .then(props.onCancel())
+            }).then(response => console.log(response))
+            setReload(true)
+            props.onCancel()
     }
     return (  
         <form onSubmit={handleNewPicShare} className="pic-share">

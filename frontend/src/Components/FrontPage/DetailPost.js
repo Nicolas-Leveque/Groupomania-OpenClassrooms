@@ -39,6 +39,7 @@ const DetailPost = () => {
     }
     const hideCommentForm = () => {
         setShowCommentForm(false)
+        setReload(true)
     }
     return (  
         <div className="detail-post">

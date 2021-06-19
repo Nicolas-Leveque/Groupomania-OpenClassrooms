@@ -43,3 +43,15 @@ Les utilisateurs peuvent ensuite poster des messages ou des photos sur la page d
 
 Un compte administrateur pouvant modifier ou supprimer n'importe quel post, photo ou commentaire existe: il appartient a la personne controlant l'adresse mail "admin@groupomania.fr" Ceci est codé en dur dans l'api est entre en fonction au moment de la création d'un compte avec cet adresse. 
 
+
+## Variables d'environnement 
+
+Le site utilise plusieurs variables d'environnement regroupées dans le fichier dev.env ( il est possible d'utiliser un autre nom, il faudra cependant modifier le script dev dans le fichier package.json ) localisé dans le dossier /backend/app/config
+
+DB_HOST, DB_USER, DB_PASSWORD, DB_NAME sont les éléments d'authentification permettant de se connecter à la base de données. 
+
+DB_DIALECT est utilisée par sequelize pour déterminer le type de base de donnée ( mySQL, postgrSQL, SQLite et d'autres )
+
+JWT_TOKEN permet à json web token de créer des tokens d'authentification.
+
+PORT est le port sur lequel l'application va s'ouvrir. 

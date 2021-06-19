@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
+import { AuthContext } from '../../Contexts/AuthContext'
 import NewShare from './NewShare'
 import NewPic from './NewPic'
 import './ShareForm.css'
@@ -6,6 +7,7 @@ import './ShareForm.css'
 const ShareForm = () => {
     const [isTextFormVisible, setIsTextFormVisible] = useState(false)
     const [isPicFormVisible, setIsPicFormVisible] = useState(false)
+    const { setReload } = useContext( AuthContext )
     const showTextForm = () => {
         setIsTextFormVisible(true)
     }
@@ -15,6 +17,7 @@ const ShareForm = () => {
     const collapseForm = () => {
         setIsTextFormVisible(false)
         setIsPicFormVisible(false)
+        setReload(true)
     }
     return(
         <div className="share-form">

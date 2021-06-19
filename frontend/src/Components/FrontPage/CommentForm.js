@@ -21,8 +21,8 @@ const CommentForm = (props) => {
             headers: myHeaders,
             body: JSON.stringify(newComment)
         }).then(response => console.log(response))
-        .then(setReload( true ))
-        .then(props.onCancel())
+        setReload(true)
+        props.onCancel()
     }
     return (  
         <form onSubmit={createComment}>
