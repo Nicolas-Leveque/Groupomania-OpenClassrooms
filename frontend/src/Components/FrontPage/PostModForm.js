@@ -23,8 +23,8 @@ const PostModForm = (props) => {
             body: JSON.stringify(postData)
         })
         .then(res => console.log(res))
-        .then(setReload( true ))
-        .then(props.switch(e))
+        setReload(true)
+        props.switch(e)
     }
     return (  
         <form className="post-input" onSubmit={handleModifyPost}>
