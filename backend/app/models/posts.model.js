@@ -6,15 +6,9 @@ module.exports = (sequelize, Sequelize) => {
         contenu: {
             type: Sequelize.TEXT
         },
-        imageType: {
+        imageUrl: {
             type: Sequelize.STRING
         },
-        imageName: {
-            type: Sequelize.STRING
-        },
-        imageData: {
-            type: Sequelize.BLOB('long'),
-        }, 
     })
     return Post
 }

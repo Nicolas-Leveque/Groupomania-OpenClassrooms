@@ -29,16 +29,8 @@ module.exports = (sequelize, Sequelize) => {
             type: Sequelize.BOOLEAN,
             allowNull: false
         },
-        imageType: {
+        imageUrl: {
             type: Sequelize.STRING,
-            defaultValue: 'image/jpeg'
-        },
-        imageName: {
-            type: Sequelize.STRING,
-            defaultValue: 'avatar.jpg' 
-        },
-        imageData: {
-            type: Sequelize.BLOB('long'),
         },
         fullName: {
             type: Sequelize.VIRTUAL,
