@@ -4,7 +4,8 @@
   "description": "backend de l'appplication groupomania",
   "main": "server.js",
   "scripts": {
-    "dev": "env-cmd -f ./app/config/dev.env nodemon server.js -e js"
+    "dev": "env-cmd -f ./app/config/dev.env nodemon server.js -e js",
+    "test": "jest"
   },
   "jest": {
     "testEnvironment": "node"
