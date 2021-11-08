@@ -22,6 +22,8 @@ const corsOptions = {
 
 app.use(cors(corsOptions))
 
+app.use('/images', express.static(path.join(__dirname, 'images')))
+
 app.use(userRouter)
 app.use(postRouter)
 app.use(commentRouter)

@@ -1,5 +1,5 @@
 const multer = require('multer')
-const filter = require('../middleware/filter')
+const filterFiles = require('../middleware/filter')
 
 const storage = multer.diskStorage({
     destination: (req, file, callback) => {
