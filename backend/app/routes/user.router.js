@@ -6,9 +6,8 @@ const userCtrl = require('../controllers/user.controller');
 
 router.post('/signup', userCtrl.signup)
 router.post('/login', userCtrl.login)
-router.get('/user/me', auth, userCtrl.getUser)
-router.delete('/:id',auth, userCtrl.deleteUser)
-router.post('/user/avatar', auth, upload.single('imageData'), userCtrl.uploadAvatar)
-router.put('/user/:id', auth, userCtrl.modifyUser)
+router.get('/me', auth, userCtrl.getUser)
+router.delete('/delete',auth, userCtrl.deleteUser)
+router.put('/modify', auth, userCtrl.modifyUser)
 
 module.exports = router

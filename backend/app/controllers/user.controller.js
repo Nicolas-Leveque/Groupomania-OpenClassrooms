@@ -8,21 +8,21 @@ const Op = db.Sequelize.Op
 
 const router = new express.Router()
 
-const defaultAvatar = fs.readFileSync(__dirname + '/avatar.jpg')
+// const defaultAvatar = fs.readFileSync('images/avatar.jpg')
 
 exports.signup = async (req, res) => {
     try {
         const userInformation = { ...req.body}
         if (!userInformation.imageUrl ){
-            userInformation.imageUrl = defaultAvatar
+            userInformation.imageUrl = 'images/avatar.jpg'
         }
         if ( userInformation.email === 'admin@groupomania.fr' ) {
             userInformation.admin = true
         } else {
             userInformation.admin = false
         }
-        userInformation.imageUrl = `${req.protocol}://${req.get('host')}/app/images/${
-            req.file.filename}`
+        // userInformation.imageUrl = `${req.protocol}://${req.get('host')}/app/images/${
+        //     req.file.filename}`
         const hashedPassword = await bcrypt.hash(userInformation.password, 10)
         userInformation.password = hashedPassword
         const user = await User.create(userInformation)
@@ -75,7 +75,7 @@ exports.getUser = async (req, res) => {
 
 exports.deleteUser = async ( req, res) => {
     try {
-        const id = req.params.id
+        const id = req.user.id
         User.destroy({ where: { id: id}})
         res.status(200).json({message: "Utilisateur supprimé"})
     }catch(e) {

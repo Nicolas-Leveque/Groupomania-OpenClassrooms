@@ -10,6 +10,6 @@ router.get('/post/:id', auth, postCtrl.getOnePost)
 router.get('/users/:id', auth, postCtrl.getUserPosts)
 router.get('/post', auth, postCtrl.getAllposts)
 router.delete('/post/:id', auth, postCtrl.deletePost)
-router.post('/post/pic', auth, upload.single('imageData'), postCtrl.createPicturePost)
+//router.post('/post/pic', auth, upload.single('imageData'), postCtrl.createPicturePost)
 
 module.exports = router
