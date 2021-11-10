@@ -9,7 +9,8 @@ const router = new express.Router()
 
 exports.createComment = async (req, res) => {
     try {
-        await Comment.create(req.body)
+        const newComment = { ...req.body, userId: req.user.id}
+        await Comment.create(newComment)
         res.status(201).send({ message: "Comment created successfully"})
     } catch (e) {
         res.status(400).send(e)

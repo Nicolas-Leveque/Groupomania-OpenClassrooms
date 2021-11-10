@@ -59,11 +59,6 @@ exports.login = async ( req, res) => {
 exports.getUser = async (req, res) => {
     try {
         const user = await User.findByPk(req.user.id)
-            // .then(user => {
-            //     const userImage = user.imageData.toString('base64')
-            //     user['imageData'] = userImage
-            //     return user
-            // })
         if(!user) {
             res.status(404).send()
         }
@@ -101,19 +96,3 @@ exports.modifyUser = async (req, res) => {
         res.status(500).send(e)
     }
 }
-
-// exports.uploadAvatar = async (req, res) => {
-//     try {
-//         await User.update({
-//             imageType: req.file.mimetype,
-//             imageName: req.file.originalname,
-//             imageData: req.file.buffer, 
-//             },{where: {
-//                 id: req.user.id
-//             }
-//             })
-//         res.status(201).json({ message: "avatar en ligne" })
-//     } catch (e) {
-//         res.status(400).send(e)
-//     }
-// }
