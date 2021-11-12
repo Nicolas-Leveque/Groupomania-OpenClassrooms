@@ -4,4 +4,5 @@
 /backend/app/config/test.env
 /frontend/node_modules/
 /frontend/src/examples/
+/.idea
 .DS_Store

@@ -1,6 +1,7 @@
 const express = require('express')
 const db = require('../models')
 const Comment = db.comments
+const Post = db.posts
 const User = db.users
 const Op = db.Sequelize.Op
 const { QueryTypes } = require('sequelize')
@@ -48,13 +49,11 @@ exports.getOneComment = async (req, res) => {
 exports.getPostComments = async (req, res) => {
     try {
         const id = req.params.id
-        const comments = await Comment.sequelize.query(`SELECT comments.userId, comments.id, contenu, comments.createdAt, comments.postId, firstName, lastName, imagetype, imageData FROM comments JOIN users on comments.userId = users.id WHERE postId = ${id} ORDER by comments.createdAt ASC`, {type: QueryTypes.SELECT})
-        .then(comment => {
-            comment.map(comment => {
-                const userImage = comment.imageData.toString('base64')
-                comment['imageData'] = userImage
-            })
-            return comment
+        const comments = await Comment.findAll({
+            where: {
+                postId: id
+            },
+            include: {model: User, as: 'user'}
         })
         if (!comments) {
             res.status(404).send()

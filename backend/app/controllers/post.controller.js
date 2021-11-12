@@ -1,26 +1,37 @@
 const express = require('express')
+const fs = require('fs')
 const db = require('../models')
 const Post = db.posts
 const User = db.users
 const Comment = db.comments
 
-const { QueryTypes } = require('sequelize')
 
 const router = new express.Router()
 
 exports.createPost = async (req, res) => {
     try {
-    await Post.create({...req.body, userId: req.user.id})
-    res.status(201).send({ message: "Post created"})
+        const imageUrl = `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
+        await Post.create({...req.body, userId: req.user.id, imageUrl: imageUrl})
+        res.status(201).send({ message: "Post created"})
     } catch (e) {
         res.status(400).send(e)
     }
 }
 
-
 exports.modifyPost = async (req, res) => {
     try {
-        const post = await Post.update( req.body, {
+        const postObject = req.file ? {
+            ...req.body,
+            imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
+        }
+        : { ...req.body}
+
+        if (postObject.imageUrl) {
+            const oldPost = await Post.findOne({ where: {id: req.params.id}})
+            const oldFile = oldPost.imageUrl.split('/images/')[1]
+            fs.unlinkSync(`images/${oldFile}`)
+        }
+        const post = await Post.update( postObject, {
             where: { id: req.params.id},
         })
         if (!post) {
@@ -36,7 +47,6 @@ exports.modifyPost = async (req, res) => {
 exports.getOnePost = async (req, res) => {
     try {
         const id = req.params.id
-        // const post = await Post.sequelize.query(`SELECT posts.userId, posts.id, posts.titre, posts.contenu, posts.createdAt AS creation, posts.imageUrl, users.firstName, users.lastName, users.admin, users.imageUrl as userAvatar, COUNT(comments.postID) AS nbr_comments FROM posts JOIN users ON posts.userId = users.id LEFT JOIN comments ON posts.id = comments.postId WHERE posts.id = ${id}`, {type: QueryTypes.SELECT})
         const post = await Post.findOne({
             where:{
                 id: id
@@ -72,17 +82,10 @@ exports.getUserPosts = async (req, res) => {
 
 exports.getAllposts = async (req, res) => {
     try {
-        // const posts = await Post.sequelize.query('
-        // SELECT posts.userId, posts.id, posts.titre, posts.contenu, DATE_FORMAT(posts.createdAt,
-        // "le %e/%m/%Y à %H:%i") AS creation, posts.imageUrl, users.firstName, users.lastName,
-        // users.admin, users.imageType, users.imageData, COUNT(postID) AS nbr_comments
-        // FROM posts JOIN users ON posts.userId = users.id
-        // LEFT JOIN comments ON posts.id = comments.postId GROUP BY posts.id
-        // ORDER BY posts.createdAt DESC', {type: QueryTypes.SELECT})
         const posts = await Post.findAll({
-            where: {
-                userInd: req.user.id
-            },
+            // where: {
+            //     userId: req.userid
+            // },
             include: {model: User, as: 'user'},
             include: { model: Comment, as: 'comments'}
         })
@@ -96,7 +99,15 @@ exports.getAllposts = async (req, res) => {
 exports.deletePost = async (req, res) => {
     try {
         const id = req.params.id
-        Post.destroy({
+        const post = await Post.findOne({
+            where:{
+                id: id
+            }
+        })
+        const fileName = post.imageUrl.split('images/')[1]
+        console.log(post.imageUrl)
+        fs.unlinkSync(`./images/${fileName}`)
+        await Post.destroy({
             where: { id: id}
         })
         res.status(200).send({ message: "post deleted"})

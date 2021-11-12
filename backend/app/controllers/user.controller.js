@@ -13,6 +13,10 @@ const router = new express.Router()
 exports.signup = async (req, res) => {
     try {
         const userInformation = { ...req.body}
+        if (req.file) {
+            const imageUrl = `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
+            userInformation.imageUrl = imageUrl
+        }
         if (!userInformation.imageUrl ){
             userInformation.imageUrl = 'images/avatar.jpg'
         }
