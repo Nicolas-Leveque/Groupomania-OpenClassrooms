@@ -1,41 +1,41 @@
-const dbConfig = require('../config/db.config')
-const { Sequelize } = require('sequelize')
+const dbConfig = require('../config/db.config');
+const { Sequelize } = require('sequelize');
 
 const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
-    host: dbConfig.HOST,
-    dialect: 'postgres',
-    operatorAliases: false,
-    dialectOptions: { 
-        ssl: {
-            require: true,
-            rejectUnauthorized: false
-        }
-    }
-})
+	host: dbConfig.HOST,
+	dialect: 'mysql',
+	operatorAliases: false,
+	dialectOptions: {
+		ssl: {
+			require: true,
+			rejectUnauthorized: false,
+		},
+	},
+});
 
-const db = {}
+const db = {};
 
-db.Sequelize = Sequelize
-db.sequelize = sequelize
+db.Sequelize = Sequelize;
+db.sequelize = sequelize;
 
-db.users = require('./users.model')(sequelize, Sequelize)
-db.posts = require('./posts.model')(sequelize, Sequelize)
-db.comments = require('./comments.model')(sequelize, Sequelize)
+db.users = require('./users.model')(sequelize, Sequelize);
+db.posts = require('./posts.model')(sequelize, Sequelize);
+db.comments = require('./comments.model')(sequelize, Sequelize);
 
-db.users.hasMany(db.posts, { as: "posts" })
-db.users.hasMany(db.comments, { as: "comments" })
-db.posts.hasMany(db.comments, { as: "comments" })
+db.users.hasMany(db.posts, { as: 'posts' });
+db.users.hasMany(db.comments, { as: 'comments' });
+db.posts.hasMany(db.comments, { as: 'comments' });
 
-db.posts.belongsTo(db.users, { 
-    foreignKey: "userId" ,
-    as: "user" 
-})
+db.posts.belongsTo(db.users, {
+	foreignKey: 'userId',
+	as: 'user',
+});
 db.comments.belongsTo(db.posts, {
-    foreignKey: "postId",
-    as: "post"
-})
+	foreignKey: 'postId',
+	as: 'post',
+});
 db.comments.belongsTo(db.users, {
-    foreignKey: "userId",
-    as: "user"
-})
-module.exports = db
+	foreignKey: 'userId',
+	as: 'user',
+});
+module.exports = db;
